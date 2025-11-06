@@ -191,9 +191,9 @@
   <div></div><div></div><div></div>
 </div>
 <div class="menu" id="menu">
-  <a onclick="openModal('aboutModal')">About</a>
-  <a onclick="openModal('servicesModal')">Services</a>
-  <a onclick="openModal('contactModal')">Contact</a>
+  <a onclick="openModal('aboutModal'); closeMenu()">About</a>
+  <a onclick="openModal('serviceModal'); closeMenu()">Services</a>
+  <a onclick="openModal('contactModal'); closeMenu()">Contact</a>
 </div>
 
 <!-- Modals -->
@@ -217,6 +217,7 @@
 
     <h3>Service Details</h3>
     <p>• First wave clearing during heavy snowfalls: early morning (before 7 AM) or afternoon, depending on when the snow occurs, to keep walkways accessible during the day.</p>
+
     <p><strong>Basic</strong><br>
     • Snow cleared within 24 hours after snowfall ends<br>
     • Second clearing for snow > 2.5 cm (1 in)<br>
@@ -239,7 +240,6 @@
   </div>
 </div>
 
-
 <div class="modal" id="contactModal">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
@@ -248,6 +248,22 @@
     <p>📧 Email: propertycareserviceworks@gmail.com</p>
   </div>
 </div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('active');
+}
+function closeMenu() {
+  document.getElementById('menu').classList.remove('active');
+}
+function openModal(id) {
+  document.getElementById(id).style.display = 'flex';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+</script>
+
 
 <div class="welcome-box">
   <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" 
@@ -428,6 +444,7 @@ drivewaySelect.addEventListener('change', updatePrice);
 </script>
 </body>
 </html>
+
 
 
 
