@@ -156,6 +156,26 @@
     margin-top: 80px;
   }
 
+  /* Responsive Images */
+  .modal-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 12px;
+  }
+
+  .welcome-image {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
   /* Modal Styles */
   .modal {
     display: none;
@@ -183,31 +203,7 @@
     font-size: 24px;
     cursor: pointer;
   }
-.modal-image {
-  width: 100%;
-  max-width: 450px; /* max width in modal */
-  height: auto;
-  display: block;
-  margin: 0 auto 20px auto;
-  border-radius: 12px;
-}
 
-.welcome-banner {
-  width: 100%;
-  max-width: 800px;
-  height: auto;
-  border-radius: 12px;
-  margin: 0 auto 20px auto;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  display: block;
-}
-
-/* Optional: ensure modals are scrollable on small screens */
-.modal-content {
-  max-width: 90%;
-  max-height: 90%;
-  overflow-y: auto;
-}
   @keyframes fadeIn {
     from {opacity: 0; transform: translateY(-20px);}
     to {opacity: 1; transform: translateY(0);}
@@ -232,16 +228,17 @@
   <a onclick="openModal('contactModal')">Contact</a>
 </div>
 
-<!-- Modals -->
+<!-- About Modal -->
 <div id="aboutModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-    <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="About Us">
+    <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="About Us" class="modal-image">
     <h2>About Property Care Service Works</h2>
     <p>We currently specialize in reliable snow removal services, ensuring every job is completed professionally and on time. Lawn maintenance and year-round property care services will be available soon as we continue to expand our offerings.</p>
   </div>
 </div>
 
+<!-- Services Modal -->
 <div id="servicesModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('servicesModal')">&times;</span>
@@ -256,6 +253,7 @@
   </div>
 </div>
 
+<!-- Contact Modal -->
 <div id="contactModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('contactModal')">&times;</span>
@@ -264,15 +262,15 @@
   </div>
 </div>
 
+<!-- Welcome Banner -->
 <div class="welcome-box">
-  <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" 
-       alt="Snow Removal Banner" 
-       style="width: 100%; max-width: 800px; border-radius: 12px; margin: 0 0 20px 0; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+  <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="Snow Removal Banner" class="welcome-image">
   <p style="font-size: 20px; text-align: center; color: #334155; max-width: 700px; margin: 0 auto;">
     Fill out our request form below to get started!
   </p>
 </div>
 
+<!-- Form -->
 <div class="container">
 <form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
   <label>Full Name:</label>
@@ -456,8 +454,3 @@ drivewaySelect.addEventListener('change', updatePrice);
 </script>
 </body>
 </html>
-
-
-
-
-
