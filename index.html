@@ -1,195 +1,257 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Snow Removal Service Form</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Snow Removal Form</title>
 <style>
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #1e293b;
-    background: #f8fafc;
-    padding: 30px;
-  }
-  form {
-    background: #fff;
-    max-width: 650px;
-    margin: auto;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  }
-  h2, h3 {
-    text-align: center;
-    color: #0f172a;
-  }
-  label {
-    display: block;
-    margin-top: 15px;
-    font-weight: 500;
-  }
-  input[type="text"], input[type="email"], input[type="tel"], textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 8px;
-    border: 1px solid #cbd5e1;
-  }
-  input[type="radio"], input[type="checkbox"] {
-    margin-right: 8px;
-  }
-  button {
-    background-color: #0ea5e9;
-    color: #fff;
-    border: none;
-    padding: 12px 25px;
-    margin-top: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-  }
-  button:hover {
-    background-color: #0284c7;
-  }
-  .form-list {
-    margin-top: 25px;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body, html { height: 100%; font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; }
+.bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,50,0.5); z-index: -1; }
+.box, .welcome-box {
+  max-width: 600px; margin: 50px auto; padding: 30px; border-radius: 12px;
+  background: #ffffffcc; border: 1px solid #dbeafe; backdrop-filter: blur(4px);
+  color: #1e293b; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.welcome-box { text-align: center; margin: 30px auto; background: #ffffffcc; }
+p { color: #334155; margin-bottom: 20px; font-size: 18px; text-align: center; }
+h2, h3 { color: #1e3a8a; margin-bottom: 12px; }
+label { display: block; margin-bottom: 8px; font-size: 16px; color: #1e293b; }
+input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+  width: 100%; padding: 12px; margin-bottom: 18px; border: 1px solid #bfdbfe;
+  border-radius: 8px; background: #f8fafc; color: #1e293b; font-size: 16px;
+}
+input::placeholder, textarea::placeholder { color: #64748b; }
+input[type="checkbox"], input[type="radio"] { accent-color: #3b82f6; transform: scale(1.2); margin-right: 8px; cursor: pointer; }
+button {
+  background-color: #3b82f6; color: #ffffff; padding: 12px 24px; border: none;
+  border-radius: 8px; font-size: 16px; cursor: pointer; display: block;
+  margin: 20px auto 0 auto; transition: 0.3s;
+}
+button:hover { background-color: #2563eb; }
+.form-list h3 { font-weight: 600; color: #1e3a8a; font-size: 18px; margin-top: 20px; }
+#priceModal {
+  display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:50;
+}
+#priceModalContent {
+  background: #ffffff; color: #1e293b; padding: 30px; border-radius: 12px;
+  max-width: 400px; width: 90%; text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+#priceModalContent h3 { color: #1e3a8a; margin-bottom: 10px; }
+#priceModalContent p { margin: 8px 0; }
+#priceModalContent button { display: inline-block; margin: 10px; padding: 10px 18px; font-size: 15px; }
+#cancelBtn { background: #e2e8f0; color: #1e293b; }
+.hamburger {
+  position: fixed; top: 20px; right: 20px; width: 35px; height: 25px;
+  cursor: pointer; z-index: 60; display: flex; flex-direction: column; justify-content: space-between;
+}
+.hamburger div { width: 100%; height: 4px; background: #fff; border-radius: 2px; transition: all 0.3s ease; }
+.hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.hamburger.active div:nth-child(2) { opacity: 0; }
+.hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+.menu {
+  position: fixed; top: 0; right: -300px; width: 300px; height: 100%;
+  background: #ffffffee; padding: 60px 20px 20px 20px;
+  transition: right 0.3s ease; z-index: 55; overflow-y: auto; color: #1e3a8a;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+}
+.menu.active { right: 0; }
+.menu h3 { color: #1e3a8a; margin-bottom: 10px; text-align: center; }
+.menu p { margin-bottom: 10px; color: #1e293b; font-size: 16px; text-align: center; }
+.menu .close-menu {
+  background: #3b82f6; color: #fff; border: none;
+  padding: 10px 16px; border-radius: 8px; cursor: pointer;
+  display: block; margin: 20px auto 0 auto;
+}
+.menu .close-menu:hover { background: #2563eb; }
+@media (max-width: 600px) {
+  .box { margin: 20px; padding: 20px; }
+  .hamburger { top: 20px; }
+}
 </style>
 </head>
 <body>
 
-<form id="snowForm" action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST" enctype="multipart/form-data">
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="https://ik.imagekit.io/uiffzsgnp/istockphoto-1470507283-640_adpp_is.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
 
-  <!-- Hidden FormSubmit fields -->
-  <input type="hidden" name="_subject" value="New Snow Removal Request!">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
-  <input type="hidden" name="_captcha" value="true">
-  <input type="hidden" name="_cc" value="propertycareserviceworks@gmail.com">
-  <input type="hidden" name="_honey" style="display:none">
-  <input type="hidden" id="autoresponseField" name="_autoresponse" value="">
-  <input type="hidden" name="message" id="message">
+<div class="welcome-box">
+  <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg"
+       alt="Snow Removal Banner"
+       style="width: 100%; max-width: 800px; border-radius: 12px; margin: 0 0 20px 0; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+  <p>Fill out our request form below to get started!</p>
+</div>
 
-  <h2>Service Request Form</h2>
+<div class="hamburger" id="hamburger" onclick="toggleMenu()">
+  <div></div><div></div><div></div>
+</div>
 
-  <label for="name">Full Name</label>
-  <input type="text" id="name" name="name" placeholder="Enter your name" required>
+<div class="menu" id="menu">
+  <h3>Service Details</h3>
+  <p><strong>Basic:</strong> Standard snow removal and driveway clearing.</p>
+  <p><strong>Premium:</strong> Walkway, driveway, and sidewalk service included.</p>
+  <p><strong>V.I.P:</strong> Full priority service + de-icing treatment.</p>
+  <h3>Contact Info</h3>
+  <p>📞 (123) 456-7890</p>
+  <p>📧 info@testbusiness.com</p>
+  <p>📍 Saskatoon, SK</p>
+  <button class="close-menu" onclick="toggleMenu()">Close</button>
+</div>
 
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+<div class="box">
+  <form id="snowForm" action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
+    <!-- FormSubmit hidden settings -->
+    <input type="hidden" name="_subject" value="New Snow Removal Request!">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="true">
+    <input type="hidden" name="_next" value="https://formsubmit.co/thank-you.html">
+    <input type="hidden" name="_replyto" id="replyTo" value="">
+    <input type="hidden" id="autoresponseField" name="_autoresponse" value="">
+    <input type="hidden" name="message" id="message">
 
-  <label for="phone">Phone Number</label>
-  <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+    <h2><center>Service Request Form</center></h2>
 
-  <label for="address">Address</label>
-  <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required />
 
-  <label for="location">Location</label>
-  <select id="location" name="location" required>
-    <option value="">-- Select Location --</option>
-    <option value="Rosewood">Rosewood</option>
-    <option value="Briarwood">Briarwood</option>
-    <option value="Lakeridge">Lakeridge</option>
-  </select>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required />
 
-  <div class="form-list">
-    <h3>House Info</h3>
-    <label><input type="radio" name="houseType" value="Lane House / Town House" required>Lane House / Town House</label>
-    <label><input type="radio" name="houseType" value="Attached Garage">Attached Garage</label>
-    <label><input type="radio" name="houseType" value="Acreage">Acreage</label>
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
 
-    <h3>Service Type</h3>
-    <label><input type="radio" name="serviceType" value="Basic" required>Basic</label>
-    <label><input type="radio" name="serviceType" value="Premium">Premium</label>
-    <label><input type="radio" name="serviceType" value="V.I.P">V.I.P</label>
-  </div>
+    <label for="address">Address</label>
+    <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
 
-  <div class="form-list">
-    <h3>Driveway Spaces</h3>
-    <p>If you have a driveway, how many cars can it fit?</p>
-    <select id="driveway" name="driveway">
-      <option value="0">0</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
+    <label for="location">Location</label>
+    <select id="location" name="location" required>
+      <option value="">-- Select Location --</option>
+      <option value="Rosewood">Rosewood</option>
+      <option value="Briarwood">Briarwood</option>
+      <option value="Lakeridge">Lakeridge</option>
     </select>
 
-    <h3>Clear Snow From These Areas</h3>
-    <label><input type="checkbox" name="snowAreas[]" value="Front walks and steps">Front walks and steps</label>
-    <label><input type="checkbox" name="snowAreas[]" value="Corner city sidewalk">Corner city sidewalk</label>
-    <label><input type="checkbox" name="snowAreas[]" value="Back path">Back path</label>
-    <label><input type="checkbox" name="snowAreas[]" value="Side path">Side path</label>
-    <label><input type="checkbox" name="snowAreas[]" value="Deck or patio">Deck or patio</label>
-    <label><input type="checkbox" name="snowAreas[]" value="Driveway apron/approach">Driveway apron/approach</label>
-  </div>
+    <div class="form-list">
+      <h3>House Info</h3>
+      <label><input type="radio" name="houseType" value="Lane House / Town House" required>Lane House / Town House</label>
+      <label><input type="radio" name="houseType" value="Attached Garage">Attached Garage</label>
+      <label><input type="radio" name="houseType" value="Acreage">Acreage</label>
 
-  <button type="button" id="checkPriceBtn">Check Price</button>
-</form>
+      <h3>Service Type</h3>
+      <label><input type="radio" name="serviceType" value="Basic" required>Basic</label>
+      <label><input type="radio" name="serviceType" value="Premium">Premium</label>
+      <label><input type="radio" name="serviceType" value="V.I.P">V.I.P</label>
+    </div>
+
+    <div class="form-list">
+      <h3>Driveway Spaces</h3>
+      <p>If you have a driveway, how many cars can it fit?</p>
+      <select id="driveway" name="driveway">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+
+      <h3>Clear Snow From These Areas</h3>
+      <label><input type="checkbox" name="snowAreas[]" value="Front walks and steps">Front walks and steps</label>
+      <label><input type="checkbox" name="snowAreas[]" value="Corner city sidewalk">Corner city sidewalk</label>
+      <label><input type="checkbox" name="snowAreas[]" value="Back path">Back path</label>
+      <label><input type="checkbox" name="snowAreas[]" value="Side path">Side path</label>
+      <label><input type="checkbox" name="snowAreas[]" value="Deck or patio">Deck or patio</label>
+      <label><input type="checkbox" name="snowAreas[]" value="Driveway apron/approach">Driveway apron/approach</label>
+    </div>
+
+    <button type="button" id="checkPriceBtn">Check Price</button>
+  </form>
+</div>
+
+<div id="priceModal">
+  <div id="priceModalContent">
+    <h3>Price Breakdown</h3>
+    <div id="priceDetails"></div>
+    <p>Total: $<span id="totalPrice">0</span></p>
+    <button id="confirmBtn">Confirm & Submit</button>
+    <button id="cancelBtn">Cancel</button>
+  </div>
+</div>
 
 <script>
-document.getElementById('checkPriceBtn').addEventListener('click', function() {
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const address = document.getElementById('address').value.trim();
-  const location = document.getElementById('location').value;
-  const houseType = document.querySelector('input[name="houseType"]:checked')?.value || '';
-  const serviceType = document.querySelector('input[name="serviceType"]:checked')?.value || '';
-  const driveway = document.getElementById('driveway').value;
-  const snowAreas = Array.from(document.querySelectorAll('input[name="snowAreas[]"]:checked'))
-                        .map(cb => cb.value).join(', ');
+const form = document.getElementById('snowForm');
+const checkPriceBtn = document.getElementById('checkPriceBtn');
+const priceModal = document.getElementById('priceModal');
+const priceDetails = document.getElementById('priceDetails');
+const totalPriceEl = document.getElementById('totalPrice');
+const confirmBtn = document.getElementById('confirmBtn');
+const cancelBtn = document.getElementById('cancelBtn');
+const messageInput = document.getElementById('message');
 
-  if (!name || !email || !phone || !address || !location || !houseType || !serviceType) {
-    alert('Please fill in all required fields.');
-    return;
+checkPriceBtn.addEventListener('click', () => {
+  let total = 0;
+  let breakdown = '';
+  let emailText = "Price Breakdown:\\n";
+
+  const service = document.querySelector('input[name="serviceType"]:checked');
+  const house = document.querySelector('input[name="houseType"]:checked');
+
+  if (service && house) {
+    let price = 0;
+    if (house.value === "Lane House / Town House") {
+      price = service.value === "Basic" ? 120 : service.value === "Premium" ? 150 : 180;
+    } else if (house.value === "Attached Garage") {
+      price = service.value === "Basic" ? 150 : service.value === "Premium" ? 180 : 210;
+    } else if (house.value === "Acreage") {
+      price = service.value === "Basic" ? 180 : service.value === "Premium" ? 210 : 240;
+    }
+    total += price;
+    breakdown += `${house.value} - ${service.value}: $${price}<br>`;
+    emailText += `${house.value} - ${service.value}: $${price}\\n`;
   }
 
-  // Example price logic (you can replace this with your real one)
-  let basePrice = 40;
-  if (serviceType === 'Premium') basePrice = 60;
-  if (serviceType === 'V.I.P') basePrice = 80;
-  const total = basePrice + (parseInt(driveway) * 5);
+  const drivewayCount = parseInt(document.getElementById('driveway').value) || 0;
+  if (drivewayCount > 0) {
+    const drivewayFee = drivewayCount * 10;
+    total += drivewayFee;
+    breakdown += `Driveway spaces (${drivewayCount}): $${drivewayFee}<br>`;
+    emailText += `Driveway spaces (${drivewayCount}): $${drivewayFee}\\n`;
+  }
 
-  const summaryText = 
-`📍 Location: ${location}
-🏠 House Type: ${houseType}
-🧹 Service Type: ${serviceType}
-🚗 Driveway Spaces: ${driveway}
-❄️ Areas to Clear: ${snowAreas || 'None selected'}
-💲 Estimated Total: $${total}`;
-
-  document.getElementById('message').value = summaryText;
-
-  // Create autoresponse message
-  const autoresponseText = 
-`Hello ${name},
-
-Thank you for reaching out to Property Care Service Works!
-We’ve received your snow removal request and will contact you soon.
-
-Here’s your request summary:
-------------------------------------
-Name: ${name}
-Phone: ${phone}
-Address: ${address}
-
-${summaryText}
-------------------------------------
-
-We appreciate your business!
-- Property Care Service Works Team`;
-
-  document.getElementById('autoresponseField').value = autoresponseText;
-
-  alert("Price calculated and ready to submit!");
-  document.getElementById('checkPriceBtn').textContent = "Submit Form";
-  document.getElementById('checkPriceBtn').addEventListener('click', function() {
-    document.getElementById('snowForm').submit();
+  const areas = document.querySelectorAll('input[name="snowAreas[]"]:checked');
+  areas.forEach(area => {
+    let areaFee = area.value !== "Front walks and steps" ? 10 : 0;
+    if (areaFee > 0) {
+      breakdown += `${area.value}: $${areaFee}<br>`;
+      emailText += `${area.value}: $${areaFee}\\n`;
+      total += areaFee;
+    }
   });
-});
-</script>
 
+  emailText += `Total: $${total}`;
+  priceDetails.innerHTML = breakdown;
+  totalPriceEl.textContent = total;
+  priceModal.style.display = 'flex';
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+
+  messageInput.value = emailText;
+  document.getElementById('replyTo').value = email;
+  document.getElementById('autoresponseField').value =
+    `Hello ${name},\\n\\nThank you for your snow removal request!\\nHere is your price summary:\\n\\n${emailText}\\n\\nWe'll contact you soon.\\n\\n- Property Care Service Works`;
+});
+
+cancelBtn.addEventListener('click', () => priceModal.style.display = 'none');
+confirmBtn.addEventListener('click', () => { priceModal.style.display = 'none'; form.submit(); });
+
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('active');
+  document.getElementById('hamburger').classList.toggle('active');
+}
+</script>
 </body>
 </html>
