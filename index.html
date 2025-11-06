@@ -54,18 +54,17 @@
     <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
     <label><input type="radio" name="front_walks" value="No" required> No</label>
 
-    <p>Deck or patio:</p>
-    <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
-    <label><input type="radio" name="deck_patio" value="No" required> No</label>
-    
     <p>Corner city sidewalk:</p>
     <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
     <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
 
-    <p>Side path / Basement suite access:</p>
+    <p>Side path:</p>
     <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
     <label><input type="radio" name="side_path" value="No" required> No</label>
 
+    <p>Deck or patio:</p>
+    <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
+    <label><input type="radio" name="deck_patio" value="No" required> No</label>
 
     <h3>Additional Notes</h3>
     <textarea name="notes" rows="4" cols="50" placeholder="Enter any notes here..."></textarea>
@@ -86,7 +85,7 @@
 <script>
 const prices = {
   "Lane House / Town House": { "Basic": 120, "Premium": 150, "V.I.P": 180 },
-  "Attached Garage": { "Basic": 150, "Premium": 180, "V.I.P": 210 }
+  "Attached Garage": { "Basic": 120, "Premium": 150, "V.I.P": 180 }
 };
 
 const houseRadios = document.querySelectorAll('input[name="houseType"]');
@@ -117,10 +116,13 @@ function updatePrice() {
   let total = basePrice;
   const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
-  // Driveway Fee: $15 per car beyond 2
-  let drivewayFee = (driveway > 2) ? ((driveway - 2) * 15) : 0;
-  if (drivewayFee > 0) fees.push({ item: `Driveway Fee ($15 per car over 2)`, price: drivewayFee });
-  total += drivewayFee;
+  // Driveway Fee: $15 per car beyond 2, show each car separately
+  if (driveway > 2) {
+    for (let i = 3; i <= driveway; i++) {
+      fees.push({ item: `Driveway Car ${i} Fee`, price: 15 });
+      total += 15;
+    }
+  }
 
   // Corner Sidewalk Fee
   let cornerSidewalkFee = (cornerSidewalk === "Yes") ? 30 : 0;
