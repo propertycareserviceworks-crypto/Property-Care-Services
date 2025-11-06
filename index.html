@@ -46,13 +46,21 @@
     </select>
 
     <h3>Clear Snow From These Areas</h3>
-<label for="areas">Select Areas:</label>
-<select id="areas" name="areas[]" multiple size="4">
-  <option value="Front walks and steps">Front walks and steps</option>
-  <option value="Corner city sidewalk">Corner city sidewalk</option>
-  <option value="Side path">Side path</option>
-  <option value="Deck or patio">Deck or patio</option>
-</select>
+  <p>Front walks and steps:</p>
+  <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
+  <label><input type="radio" name="front_walks" value="No" required> No</label>
+
+  <p>Corner city sidewalk:</p>
+  <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
+  <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
+
+  <p>Side path:</p>
+  <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
+  <label><input type="radio" name="side_path" value="No" required> No</label>
+
+  <p>Deck or patio:</p>
+  <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
+  <label><input type="radio" name="deck_patio" value="No" required> No</label>
 
 </select>
 
