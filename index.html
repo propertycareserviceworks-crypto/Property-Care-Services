@@ -183,7 +183,31 @@
     font-size: 24px;
     cursor: pointer;
   }
+.modal-image {
+  width: 100%;
+  max-width: 450px; /* max width in modal */
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 12px;
+}
 
+.welcome-banner {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 12px;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  display: block;
+}
+
+/* Optional: ensure modals are scrollable on small screens */
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+}
   @keyframes fadeIn {
     from {opacity: 0; transform: translateY(-20px);}
     to {opacity: 1; transform: translateY(0);}
@@ -432,6 +456,7 @@ drivewaySelect.addEventListener('change', updatePrice);
 </script>
 </body>
 </html>
+
 
 
 
