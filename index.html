@@ -14,29 +14,31 @@
     position: relative;
     overflow-x: hidden;
   }
-
-  .bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-  .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); z-index: -1; }
-
-  .hamburger { position: fixed; top: 20px; right: 25px; width: 30px; height: 22px; cursor: pointer; z-index: 10; }
-  .hamburger div { width: 100%; height: 4px; background-color: #1e293b; margin: 4px 0; border-radius: 2px; transition: 0.3s; }
-
-  .menu { position: fixed; top: 0; right: -220px; width: 200px; height: 100%; background: rgba(255,255,255,0.95); box-shadow: -2px 0 10px rgba(0,0,0,0.1); padding: 60px 20px; display: flex; flex-direction: column; transition: 0.3s ease; z-index: 9; }
-  .menu a { text-decoration: none; color: #1e293b; margin: 10px 0; font-weight: 500; cursor: pointer; }
-  .menu.show { right: 0; }
-
-  .container { max-width: 650px; margin: 100px auto 50px; background: rgba(255,255,255,0.8); border-radius: 20px; padding: 30px 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); backdrop-filter: blur(20px); }
-  h3 { color: #1e3a8a; margin-top: 25px; }
-  input[type="text"], input[type="email"], input[type="tel"], select, textarea { width: 100%; padding: 10px 14px; margin: 8px 0 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px; transition: all 0.2s ease; }
-  input:focus, select:focus, textarea:focus { border-color: #2563eb; outline: none; box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3); }
-  label { display: block; margin-top: 10px; }
-  button { background: linear-gradient(135deg, #2563eb, #1e40af); color: white; border: none; border-radius: 12px; padding: 12px 20px; width: 100%; font-size: 16px; margin-top: 25px; cursor: pointer; transition: 0.3s; }
-  button:hover { background: linear-gradient(135deg, #1d4ed8, #1e3a8a); transform: scale(1.02); }
-
-  table { border-collapse: collapse; width: 100%; margin-top: 10px; border-radius: 8px; overflow: hidden; }
-  th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; }
-  th { background-color: #eff6ff; color: #1e40af; }
-  #priceDisplay { margin-top: 15px; font-weight: bold; color: #1E40AF; }
+  .bg-video { position: fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-2; }
+  .overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); z-index:-1; }
+  .hamburger { position: fixed; top:20px; right:25px; width:30px; height:22px; cursor:pointer; z-index:10; }
+  .hamburger div { width:100%; height:4px; background-color:#1e293b; margin:4px 0; border-radius:2px; transition:0.3s; }
+  .menu { position: fixed; top:0; right:-220px; width:200px; height:100%; background: rgba(255,255,255,0.95); box-shadow:-2px 0 10px rgba(0,0,0,0.1); padding:60px 20px; display:flex; flex-direction:column; transition:0.3s ease; z-index:9; }
+  .menu a { text-decoration:none; color:#1e293b; margin:10px 0; font-weight:500; cursor:pointer; }
+  .menu.show { right:0; }
+  .container { max-width:650px; margin:100px auto 50px; background: rgba(255,255,255,0.8); border-radius:20px; padding:30px 40px; box-shadow:0 10px 40px rgba(0,0,0,0.15); backdrop-filter: blur(20px); }
+  h3 { color:#1e3a8a; margin-top:25px; }
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea { width:100%; padding:10px 14px; margin:8px 0 16px; border:1px solid #cbd5e1; border-radius:10px; font-size:15px; transition: all 0.2s ease; }
+  input:focus, select:focus, textarea:focus { border-color:#2563eb; outline:none; box-shadow:0 0 0 2px rgba(37,99,235,0.3); }
+  label { display:block; margin-top:10px; }
+  button { background:linear-gradient(135deg,#2563eb,#1e40af); color:white; border:none; border-radius:12px; padding:12px 20px; width:100%; font-size:16px; margin-top:25px; cursor:pointer; transition:0.3s; }
+  button:hover { background:linear-gradient(135deg,#1d4ed8,#1e3a8a); transform:scale(1.02); }
+  table { border-collapse: collapse; width: 100%; margin-top:10px; border-radius:8px; overflow:hidden; }
+  th, td { border:1px solid #cbd5e1; padding:10px; text-align:left; }
+  th { background-color:#eff6ff; color:#1e40af; }
+  #priceDisplay { margin-top:15px; font-weight:bold; color:#1E40AF; }
+  .welcome-box { text-align:center; margin-top:80px; }
+  .modal-image { width:100%; max-width:450px; height:auto; display:block; margin:0 auto 20px auto; border-radius:12px; }
+  .welcome-image { width:100%; max-width:800px; height:auto; display:block; margin:0 auto 20px auto; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+  .modal { display:none; position:fixed; z-index:20; left:0; top:0; width:100%; height:100%; overflow:auto; background: rgba(0,0,0,0.5); }
+  .modal-content { background:#fff; margin:15% auto; padding:20px; border-radius:12px; max-width:500px; box-shadow:0 8px 30px rgba(0,0,0,0.3); animation:fadeIn 0.3s ease; }
+  .close { color:#1e40af; float:right; font-size:24px; cursor:pointer; }
+  @keyframes fadeIn { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
 </style>
 </head>
 <body>
@@ -53,16 +55,51 @@
   <a onclick="openModal('contactModal')">Contact</a>
 </div>
 
+<!-- Modals -->
+<div id="aboutModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+    <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="About Us" class="modal-image">
+    <h2>About Property Care Service Works</h2>
+    <p>We currently specialize in reliable snow removal services, ensuring every job is completed professionally and on time. Lawn maintenance and year-round property care services will be available soon as we continue to expand our offerings.</p>
+  </div>
+</div>
+
+<div id="servicesModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('servicesModal')">&times;</span>
+    <h2>Our Services</h2>
+    <p>We offer a variety of packages to meet your needs:</p>
+    ❄️ Snow Removal (Basic, Premium, VIP)
+    <h3>Service Details</h3>
+    <p>First wave clearing during heavy snowfalls: early morning (before 7 AM) or afternoon, depending on when the snow occurs, to keep walkways accessible during the day.</p>
+    <p><strong>Basic</strong><br>• Snow cleared within 24 hours after snowfall ends<br>• Second clearing for snow > 2.5 cm (1 in)<br>• Up to 1 visit per 24 hours during heavy or ongoing snowfall<br>• Ideal for clients seeking reliable, cost-effective service</p>
+    <p><strong>Premium</strong><br>• Snow cleared within 12 hours after snowfall ends<br>• First wave clearing during heavy snowfalls (before 7 AM or afternoon)<br>• Second clearing same day for snow > 2.5 cm (1 in)<br>• Up to 2 visits per 24 hours during active snowfall<br>• Designed for customers who want faster access and added convenience</p>
+    <p><strong>VIP</strong><br>• Snow cleared within 6 hours after snowfall ends<br>• Priority first wave clearing (early morning or as soon as snow stops)<br>• Second clearing same day for snow > 2.5 cm (1 in), plus an extra visit if snowfall exceeds 5 cm (2 in)<br>• Up to 3 visits per 24 hours during heavy snowfall<br>• Perfect for clients seeking the fastest response and peace of mind</p>
+  </div>
+</div>
+
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('contactModal')">&times;</span>
+    <h2>Contact Us</h2> 
+    <p>Email: propertycareserviceworks@gmail.com<br>Phone: (639) 916-0667</p>
+  </div>
+</div>
+
+<div class="welcome-box">
+  <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="Snow Removal Banner" class="welcome-image">
+  <p style="font-size:20px; text-align:center; color:#334155; max-width:700px; margin:0 auto;">
+    Fill out our request form below to get started!
+  </p>
+</div>
+
 <div class="container">
 <form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
-  <label>Full Name:</label>
-  <input type="text" name="name" required>
-  <label>Email:</label>
-  <input type="email" name="email" required>
-  <label>Address:</label>
-  <input type="text" name="address" required>
-  <label>Phone Number:</label>
-  <input type="tel" name="phone" required>
+  <label>Full Name:</label><input type="text" name="name" required>
+  <label>Email:</label><input type="email" name="email" required>
+  <label>Address:</label><input type="text" name="address" required>
+  <label>Phone Number:</label><input type="tel" name="phone" required>
 
   <h3>House Info</h3>
   <label><input type="radio" name="houseType" value="Lane House / Town House" required> Lane House / Town House</label>
@@ -74,6 +111,7 @@
   <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
 
   <h3>Driveway Spaces</h3>
+  <p>If you have a driveway, how many cars can it fit?</p>
   <select id="driveway" name="driveway" required>
     <option value="">Select</option>
     <option value="0">0</option>
@@ -105,16 +143,19 @@
 
   <h3>Price Details</h3>
   <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
+  <div id="serviceDetailsDisplay" style="margin-top:10px; color:#334155;"></div>
 
   <!-- Hidden Fields -->
   <input type="hidden" name="houseServiceFee" id="houseServiceFee">
   <input type="hidden" name="drivewayFee" id="drivewayFee">
   <input type="hidden" name="cornerSidewalkFee" id="cornerSidewalkFee">
   <input type="hidden" name="sidePathFee" id="sidePathFee">
-  <input type="hidden" name="totalPrice" id="totalPrice">
   <input type="hidden" name="serviceDetails" id="serviceDetails">
+  <input type="hidden" name="totalPrice" id="totalPrice">
 
   <input type="hidden" name="_subject" value="Service Request Submission">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="true">
   <input type="hidden" name="_autoresponse" 
          value="This is an automated response.
 
@@ -122,22 +163,6 @@ Thank you for choosing our service! We will contact you shortly to confirm your 
 If you have any questions, feel free to call or text us at (639) 916-0667, or simply reply to this email.
 
 Below is the information we received along with the detailed price breakdown:
-
-<table border='1' cellpadding='8' cellspacing='0'>
-<tr><th>Item</th><th>Price ($)</th></tr>
-<tr><td>House & Service</td><td>{{houseServiceFee}}</td></tr>
-<tr><td>Driveway Fee</td><td>{{drivewayFee}}</td></tr>
-<tr><td>Corner Sidewalk</td><td>{{cornerSidewalkFee}}</td></tr>
-<tr><td>Side path / Basement suite access</td><td>{{sidePathFee}}</td></tr>
-<tr><td><strong>Total</strong></td><td><strong>{{totalPrice}}</strong></td></tr>
-</table>
-
-<h3>Selected Service Details</h3>
-{{serviceDetails}}
-">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_captcha" value="true">
-
   <button type="submit">Confirm Request</button>
 </form>
 </div>
@@ -146,37 +171,29 @@ Below is the information we received along with the detailed price breakdown:
 function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
 function openModal(id) { document.getElementById(id).style.display = 'block'; document.getElementById('menu').classList.remove('show'); }
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-window.onclick = function(event) {
-  ['aboutModal', 'servicesModal', 'contactModal'].forEach(id => {
-    const modal = document.getElementById(id);
-    if (event.target === modal) { modal.style.display = "none"; }
-  });
-}
+window.onclick = function(event) { ['aboutModal','servicesModal','contactModal'].forEach(id => { const modal = document.getElementById(id); if(event.target === modal) modal.style.display='none'; }); }
 
-const prices = {
-  "Lane House / Town House": { "Basic": 120, "Premium": 150, "V.I.P": 180 },
-  "Attached Garage": { "Basic": 150, "Premium": 180, "V.I.P": 210 }
-};
-
+// Price Calculation
+const prices = { "Lane House / Town House": {"Basic":120,"Premium":150,"V.I.P":180}, "Attached Garage":{"Basic":150,"Premium":180,"V.I.P":210} };
 const serviceDescriptions = {
-  "Basic": "• Snow cleared within 24 hours after snowfall ends\n• Second clearing for snow > 2.5 cm (1 in)\n• Up to 1 visit per 24 hours during heavy snowfall\n• Ideal for clients seeking reliable, cost-effective service",
-  "Premium": "• Snow cleared within 12 hours after snowfall ends\n• First wave clearing during heavy snowfalls (before 7 AM or afternoon)\n• Second clearing same day for snow > 2.5 cm (1 in)\n• Up to 2 visits per 24 hours during active snowfall\n• Designed for customers who want faster access and added convenience",
-  "V.I.P": "• Snow cleared within 6 hours after snowfall ends\n• Priority first wave clearing (early morning or as soon as snow stops)\n• Second clearing same day for snow > 2.5 cm (1 in), plus an extra visit if snowfall exceeds 5 cm (2 in)\n• Up to 3 visits per 24 hours during heavy snowfall\n• Perfect for clients seeking the fastest response and peace of mind"
+  "Basic":["Snow cleared within 24 hours after snowfall ends","Second clearing for snow > 2.5 cm (1 in)","Up to 1 visit per 24 hours during heavy snowfall","Ideal for clients seeking reliable, cost-effective service"],
+  "Premium":["Snow cleared within 12 hours after snowfall ends","First wave clearing during heavy snowfalls (before 7 AM or afternoon)","Second clearing same day for snow > 2.5 cm (1 in)","Up to 2 visits per 24 hours during active snowfall","Designed for customers who want faster access and added convenience"],
+  "V.I.P":["Snow cleared within 6 hours after snowfall ends","Priority first wave clearing (early morning or as soon as snow stops)","Second clearing same day for snow > 2.5 cm (1 in), plus extra visit if snowfall exceeds 5 cm (2 in)","Up to 3 visits per 24 hours during heavy snowfall","Perfect for clients seeking the fastest response and peace of mind"]
 };
-
 const houseRadios = document.querySelectorAll('input[name="houseType"]');
 const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
 const drivewaySelect = document.getElementById('driveway');
 const cornerSidewalkRadios = document.querySelectorAll('input[name="corner_sidewalk"]');
 const sidePathRadios = document.querySelectorAll('input[name="side_path"]');
-
 const priceDisplay = document.getElementById('priceDisplay');
+const serviceDetailsDisplay = document.getElementById('serviceDetails');
+
 const houseServiceFeeField = document.getElementById('houseServiceFee');
 const drivewayFeeField = document.getElementById('drivewayFee');
 const cornerSidewalkFeeField = document.getElementById('cornerSidewalkFee');
 const sidePathFeeField = document.getElementById('sidePathFee');
+const serviceDetailsField = document.getElementById('serviceDetails');
 const totalPriceField = document.getElementById('totalPrice');
-const serviceDetails = document.getElementById('serviceDetails');
 
 function getSelectedValue(radioNodeList) {
   const selected = document.querySelector(`input[name="${radioNodeList[0].name}"]:checked`);
@@ -190,57 +207,42 @@ function updatePrice() {
   const cornerSidewalk = getSelectedValue(cornerSidewalkRadios);
   const sidePath = getSelectedValue(sidePathRadios);
 
-  if (!house || !service) {
-    priceDisplay.innerHTML = "Select a House Type and Service Type to see the price.";
-    totalPriceField.value = "";
-    serviceDetails.value = "";
-    return;
-  }
+  if(!house || !service) { priceDisplay.innerHTML="Select a House Type and Service Type to see the price."; totalPriceField.value=""; serviceDetailsDisplay.innerHTML=""; return; }
 
   let basePrice = prices[house][service];
   let total = basePrice;
   const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
   let drivewayFeeText = '';
-  if (driveway > 2) {
-    for (let i = 3; i <= driveway; i++) {
-      fees.push({ item: `Driveway Car ${i} Fee`, price: 15 });
-      total += 15;
-      drivewayFeeText += `Driveway Car ${i} Fee: $15\n`;
-    }
-  }
+  if(driveway>2){ for(let i=3;i<=driveway;i++){ fees.push({item:`Driveway Car ${i} Fee`, price:15}); total+=15; drivewayFeeText += `Driveway Car ${i} Fee: $15\n`; } }
 
-  let cornerSidewalkFee = (cornerSidewalk === "Yes") ? 30 : 0;
-  if (cornerSidewalkFee > 0) fees.push({ item: "Corner Sidewalk", price: cornerSidewalkFee });
-  total += cornerSidewalkFee;
+  let cornerSidewalkFee = (cornerSidewalk==="Yes")?30:0;
+  if(cornerSidewalkFee>0) fees.push({item:"Corner Sidewalk", price:cornerSidewalkFee}); total+=cornerSidewalkFee;
 
-  let sidePathFee = (sidePath === "Yes") ? 30 : 0;
-  if (sidePathFee > 0) fees.push({ item: "Side path / Basement suite access", price: sidePathFee });
-  total += sidePathFee;
+  let sidePathFee = (sidePath==="Yes")?30:0;
+  if(sidePathFee>0) fees.push({item:"Side path / Basement suite access", price:sidePathFee}); total+=sidePathFee;
 
-  houseServiceFeeField.value = `${house} - ${service} Service: $${basePrice}`;
-  drivewayFeeField.value = drivewayFeeText.trim();
-  cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee}` : '';
-  sidePathFeeField.value = sidePathFee > 0 ? `Side path / Basement suite access: $${sidePathFee}` : '';
-  totalPriceField.value = total;
+  houseServiceFeeField.value=`${house} - ${service} Service: $${basePrice}`;
+  drivewayFeeField.value=drivewayFeeText.trim();
+  cornerSidewalkFeeField.value=cornerSidewalkFee>0?`Corner Sidewalk: $${cornerSidewalkFee}`:'';
+  sidePathFeeField.value=sidePathFee>0?`Side path / Basement suite access: $${sidePathFee}`:'';
+  totalPriceField.value=total;
 
-  serviceDetails.value = `<ul>${serviceDescriptions[service].split('\n').map(item => `<li>${item}</li>`).join('')}</ul>`;
+  let detailsHTML=''; let detailsText='';
+  if(service){ serviceDescriptions[service].forEach(item=>{ detailsHTML+=`<li>${item}</li>`; detailsText+=`• ${item}\n`; }); }
+  serviceDetailsDisplay.innerHTML=`<ul>${detailsHTML}</ul>`;
+  serviceDetailsField.value=detailsText;
 
-  let tableHTML = `<table>
-    <tr><th>Item</th><th>Price ($)</th></tr>`;
-  fees.forEach(fee => {
-    tableHTML += `<tr><td>${fee.item}</td><td>${fee.price}</td></tr>`;
-  });
-  tableHTML += `<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
-  priceDisplay.innerHTML = tableHTML;
+  let tableHTML=`<table><tr><th>Item</th><th>Price ($)</th></tr>`;
+  fees.forEach(fee=>{tableHTML+=`<tr><td>${fee.item}</td><td>${fee.price}</td></tr>`;});
+  tableHTML+=`<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
+  priceDisplay.innerHTML=tableHTML;
 }
 
-houseRadios.forEach(radio => radio.addEventListener('change', updatePrice));
-serviceRadios.forEach(radio => radio.addEventListener('change', updatePrice));
-drivewaySelect.addEventListener('change', updatePrice);
-[cornerSidewalkRadios, sidePathRadios].forEach(group => {
-  group.forEach(radio => radio.addEventListener('change', updatePrice));
-});
+houseRadios.forEach(radio=>radio.addEventListener('change',updatePrice));
+serviceRadios.forEach(radio=>radio.addEventListener('change',updatePrice));
+drivewaySelect.addEventListener('change',updatePrice);
+[cornerSidewalkRadios,sidePathRadios].forEach(group=>{group.forEach(radio=>radio.addEventListener('change',updatePrice));});
 </script>
 </body>
 </html>
