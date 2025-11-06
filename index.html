@@ -55,9 +55,6 @@
     <p id="priceDisplay">Select options to see the total price.</p>
   </div>
   
-  <!-- Hidden field to send total price -->
-  <input type="hidden" id="totalPrice" name="totalPrice" value="">
-
   <input type="hidden" name="_subject" value="Test Submission">
   <input type="hidden" name="_autoresponse" 
          value="Thank you for your message. This is a test autoresponse from Property Care Service Works.">
@@ -78,7 +75,6 @@ const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
 const drivewaySelect = document.getElementById('driveway');
 const snowCheckboxes = document.querySelectorAll('input[name="snowAreas[]"]');
 const priceDisplay = document.getElementById('priceDisplay');
-const totalPriceField = document.getElementById('totalPrice');
 
 function updatePrice() {
   const house = document.querySelector('input[name="houseType"]:checked');
@@ -99,12 +95,8 @@ function updatePrice() {
     let total = basePrice + drivewayFee + additionalSnowFee;
 
     priceDisplay.textContent = `${house.value} - ${service.value} Service: $${basePrice} + Driveway Fee $${drivewayFee} + Snow Fee $${additionalSnowFee} = Total: $${total}`;
-
-    // Update hidden field so FormSubmit receives the total price
-    totalPriceField.value = total;
   } else {
     priceDisplay.textContent = "Select options to see the total price.";
-    totalPriceField.value = "";
   }
 }
 
