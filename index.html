@@ -55,22 +55,12 @@
     <p id="priceDisplay">Select options to see the total price.</p>
   </div>
   
-  <!-- Hidden fields for total and breakdown -->
+  <!-- Hidden field to send total price -->
   <input type="hidden" id="totalPrice" name="totalPrice" value="">
-  <input type="hidden" id="priceBreakdown" name="priceBreakdown" value="">
 
-  <input type="hidden" name="_subject" value="Service Request Submission">
+  <input type="hidden" name="_subject" value="Test Submission">
   <input type="hidden" name="_autoresponse" 
-         value="Thank you for your message. Here is the breakdown of your service request:
-
-Full Name: {name}
-Email: {email}
-Address: {address}
-Phone: {phone}
-{priceBreakdown}
-Total Price: ${totalPrice}
-
-We will contact you shortly to confirm the service.">
+         value="Thank you for your message. This is a test autoresponse from Property Care Service Works.">
   <input type="hidden" name="_template" value="table">
   <input type="hidden" name="_captcha" value="true">
   
@@ -89,7 +79,6 @@ const drivewaySelect = document.getElementById('driveway');
 const snowCheckboxes = document.querySelectorAll('input[name="snowAreas[]"]');
 const priceDisplay = document.getElementById('priceDisplay');
 const totalPriceField = document.getElementById('totalPrice');
-const priceBreakdownField = document.getElementById('priceBreakdown');
 
 function updatePrice() {
   const house = document.querySelector('input[name="houseType"]:checked');
@@ -100,34 +89,22 @@ function updatePrice() {
     let basePrice = prices[house.value][service.value];
     let drivewayFee = driveway * 15;
 
-    let snowFee = 0;
-    let snowList = [];
+    let additionalSnowFee = 0;
     snowCheckboxes.forEach(cb => {
-      if(cb.checked) {
-        snowList.push(cb.value);
-        if(cb.value === "Corner city sidewalk" || cb.value === "Side path") {
-          snowFee += 30;
-        }
+      if(cb.checked && (cb.value === "Corner city sidewalk" || cb.value === "Side path")) {
+        additionalSnowFee += 30;
       }
     });
 
-    let total = basePrice + drivewayFee + snowFee;
+    let total = basePrice + drivewayFee + additionalSnowFee;
 
-    // Display breakdown
-    let breakdownText = `House Type: ${house.value}
-Service Type: ${service.value} ($${basePrice})
-Driveway Fee ($15 x ${driveway}): $${drivewayFee}
-Snow Areas: ${snowList.length ? snowList.join(", ") : "None"} ($${snowFee})`;
+    priceDisplay.textContent = `${house.value} - ${service.value} Service: $${basePrice} + Driveway Fee $${drivewayFee} + Snow Fee $${additionalSnowFee} = Total: $${total}`;
 
-    priceDisplay.textContent = `${breakdownText}\nTotal: $${total}`;
-
-    // Update hidden fields
+    // Update hidden field so FormSubmit receives the total price
     totalPriceField.value = total;
-    priceBreakdownField.value = breakdownText;
   } else {
     priceDisplay.textContent = "Select options to see the total price.";
     totalPriceField.value = "";
-    priceBreakdownField.value = "";
   }
 }
 
