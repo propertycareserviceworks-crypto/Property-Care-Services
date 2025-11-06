@@ -34,10 +34,7 @@
     <label><input type="radio" name="serviceType" value="Premium"> Premium</label>
     <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
 
-    <h3>Price Details</h3>
-    <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
-    
-    <h3>Driveway Spaces</h3>
+     <h3>Driveway Spaces</h3>
     <p>If you have a driveway, how many cars can it fit?</p>
     <select id="driveway" name="driveway" required>
       <option value="">Select</option>
@@ -47,6 +44,19 @@
       <option value="3">3</option>
       <option value="4">4</option>
     </select>
+
+    <h3>Clear Snow From These Areas</h3>
+<label for="Areas">Choose the Area:</label>
+<select name="Areas" id="Areas" multiple>
+  <option value="Front walks and steps">Front walks and steps</option>
+  <option value="Corner city sidewalk">Corner city sidewalk</option>
+  <option value="Side path">Side path</option>
+  <option value="Deck or patio">Deck or patio</option>
+</select>
+
+    <h3>Price Details</h3>
+    <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
+    
   </div>
   
   <input type="hidden" name="_subject" value="Test Submission">
