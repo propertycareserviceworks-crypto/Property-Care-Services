@@ -91,10 +91,8 @@ const prices = {
 const houseRadios = document.querySelectorAll('input[name="houseType"]');
 const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
 const drivewaySelect = document.getElementById('driveway');
-const frontWalksRadios = document.querySelectorAll('input[name="front_walks"]');
 const cornerSidewalkRadios = document.querySelectorAll('input[name="corner_sidewalk"]');
 const sidePathRadios = document.querySelectorAll('input[name="side_path"]');
-const deckPatioRadios = document.querySelectorAll('input[name="deck_patio"]');
 const priceDisplay = document.getElementById('priceDisplay');
 
 function getSelectedValue(radioNodeList) {
@@ -105,11 +103,9 @@ function getSelectedValue(radioNodeList) {
 function updatePrice() {
   const house = getSelectedValue(houseRadios);
   const service = getSelectedValue(serviceRadios);
-  const driveway = drivewaySelect.value;
-  const frontWalks = getSelectedValue(frontWalksRadios);
+  const driveway = parseInt(drivewaySelect.value) || 0;
   const cornerSidewalk = getSelectedValue(cornerSidewalkRadios);
   const sidePath = getSelectedValue(sidePathRadios);
-  const deckPatio = getSelectedValue(deckPatioRadios);
 
   if (!house || !service) {
     priceDisplay.innerHTML = "Select a House Type and Service Type to see the price.";
@@ -120,15 +116,10 @@ function updatePrice() {
   let total = basePrice;
   const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
-  // Driveway Fee
-  let drivewayFee = (driveway > 2) ? 15 : 0;
-  if (drivewayFee > 0) fees.push({ item: `Additional Driveway Fee`, price: drivewayFee });
+  // Driveway Fee: $15 per car over 2
+  let drivewayFee = (driveway > 2) ? (driveway * 15) : 0;
+  if (drivewayFee > 0) fees.push({ item: `Driveway Fee ($15 per car)`, price: drivewayFee });
   total += drivewayFee;
-
-  // Front Walks Fee
-  let frontWalksFee = (frontWalks === "Yes") ? 30 : 0;
-  if (frontWalksFee > 0) fees.push({ item: "Front Walks and Steps", price: frontWalksFee });
-  total += frontWalksFee;
 
   // Corner Sidewalk Fee
   let cornerSidewalkFee = (cornerSidewalk === "Yes") ? 30 : 0;
@@ -139,11 +130,6 @@ function updatePrice() {
   let sidePathFee = (sidePath === "Yes") ? 30 : 0;
   if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
   total += sidePathFee;
-
-  // Deck or Patio Fee
-  let deckFee = (deckPatio === "Yes") ? 30 : 0;
-  if (deckFee > 0) fees.push({ item: "Deck or Patio", price: deckFee });
-  total += deckFee;
 
   // Build table HTML
   let tableHTML = `<table>
@@ -161,7 +147,7 @@ function updatePrice() {
 houseRadios.forEach(radio => radio.addEventListener('change', updatePrice));
 serviceRadios.forEach(radio => radio.addEventListener('change', updatePrice));
 drivewaySelect.addEventListener('change', updatePrice);
-[frontWalksRadios, cornerSidewalkRadios, sidePathRadios, deckPatioRadios].forEach(group => {
+[cornerSidewalkRadios, sidePathRadios].forEach(group => {
   group.forEach(radio => radio.addEventListener('change', updatePrice));
 });
 </script>
