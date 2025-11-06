@@ -72,6 +72,7 @@
     color: #1e293b;
     margin: 10px 0;
     font-weight: 500;
+    cursor: pointer;
   }
 
   .menu.show { right: 0; }
@@ -154,6 +155,39 @@
     text-align: center;
     margin-top: 80px;
   }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 500px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease;
+  }
+
+  .close {
+    color: #1e40af;
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
 </style>
 </head>
 <body>
@@ -169,10 +203,34 @@
   <div></div><div></div><div></div>
 </div>
 <div class="menu" id="menu">
-  <a href="#">Home</a>
-  <a href="#">Services</a>
-  <a href="#">About</a>
-  <a href="#">Contact</a>
+  <a onclick="openModal('aboutModal')">About</a>
+  <a onclick="openModal('servicesModal')">Services</a>
+  <a onclick="openModal('contactModal')">Contact</a>
+</div>
+
+<!-- Modals -->
+<div id="aboutModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+    <h2>About Us</h2>
+    <p>We provide professional property care services including snow removal, lawn maintenance, and more.</p>
+  </div>
+</div>
+
+<div id="servicesModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('servicesModal')">&times;</span>
+    <h2>Services</h2>
+    <p>Our services include Basic, Premium, and V.I.P snow removal, driveway clearing, sidewalk clearing, and more.</p>
+  </div>
+</div>
+
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('contactModal')">&times;</span>
+    <h2>Contact Us</h2>
+    <p>Email: propertycareserviceworks@gmail.com<br>Phone: [xxxxxx]</p>
+  </div>
 </div>
 
 <div class="welcome-box">
@@ -186,7 +244,6 @@
 
 <div class="container">
 <form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
-
   <label>Full Name:</label>
   <input type="text" name="name" required>
 
@@ -220,19 +277,19 @@
   </select>
 
   <h3>Clear Snow From These Areas</h3>
-  <p>Front walks and steps:</p>
+  <p><strong>Front walks and steps:</strong></p>
   <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
   <label><input type="radio" name="front_walks" value="No" required> No</label>
 
-  <p>Deck or patio:</p>
+  <p><strong>Deck or patio:</strong></p>
   <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
   <label><input type="radio" name="deck_patio" value="No" required> No</label>
 
-  <p>Corner city sidewalk:</p>
+  <p><strong>Corner city sidewalk:</strong></p>
   <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
   <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
 
-  <p>Side path:</p>
+  <p><strong>Side path:</strong></p>
   <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
   <label><input type="radio" name="side_path" value="No" required> No</label>
 
@@ -254,7 +311,7 @@
          value="This is an automated response.
 
 Thank you for choosing our service! We will contact you shortly to confirm your appointment. 
-If you have any questions, feel free to call or text us at [xxxxxx], or simply reply to this email.
+If you have any questions, feel free to call or text us at (639) 916-0667, or simply reply to this email.
 
 Below is the information we received along with the detailed price breakdown:">
   <input type="hidden" name="_template" value="table">
@@ -269,6 +326,25 @@ function toggleMenu() {
   document.getElementById('menu').classList.toggle('show');
 }
 
+function openModal(id) {
+  document.getElementById(id).style.display = 'block';
+  document.getElementById('menu').classList.remove('show');
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+window.onclick = function(event) {
+  ['aboutModal', 'servicesModal', 'contactModal'].forEach(id => {
+    const modal = document.getElementById(id);
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+}
+
+// Price Calculation
 const prices = {
   "Lane House / Town House": { "Basic": 120, "Premium": 150, "V.I.P": 180 },
   "Attached Garage": { "Basic": 150, "Premium": 180, "V.I.P": 210 }
@@ -309,7 +385,6 @@ function updatePrice() {
   let total = basePrice;
   const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
-  // Driveway Fee
   let drivewayFeeText = '';
   if (driveway > 2) {
     for (let i = 3; i <= driveway; i++) {
@@ -319,24 +394,20 @@ function updatePrice() {
     }
   }
 
-  // Corner sidewalk fee
   let cornerSidewalkFee = (cornerSidewalk === "Yes") ? 30 : 0;
   if (cornerSidewalkFee > 0) fees.push({ item: "Corner Sidewalk", price: cornerSidewalkFee });
   total += cornerSidewalkFee;
 
-  // Side path fee
   let sidePathFee = (sidePath === "Yes") ? 30 : 0;
   if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
   total += sidePathFee;
 
-  // Hidden fields
   houseServiceFeeField.value = `${house} - ${service} Service: $${basePrice}`;
   drivewayFeeField.value = drivewayFeeText.trim();
   cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee}` : '';
   sidePathFeeField.value = sidePathFee > 0 ? `Side Path: $${sidePathFee}` : '';
   totalPriceField.value = total;
 
-  // Display table
   let tableHTML = `<table>
     <tr><th>Item</th><th>Price ($)</th></tr>`;
   fees.forEach(fee => {
@@ -346,7 +417,6 @@ function updatePrice() {
   priceDisplay.innerHTML = tableHTML;
 }
 
-// Event listeners
 houseRadios.forEach(radio => radio.addEventListener('change', updatePrice));
 serviceRadios.forEach(radio => radio.addEventListener('change', updatePrice));
 drivewaySelect.addEventListener('change', updatePrice);
