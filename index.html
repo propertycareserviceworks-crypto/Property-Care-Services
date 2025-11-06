@@ -28,6 +28,25 @@
     <label><input type="radio" name="serviceType" value="Basic" required> Basic</label>
     <label><input type="radio" name="serviceType" value="Premium"> Premium</label>
     <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
+
+    <h3>Driveway Spaces</h3>
+    <p>If you have a driveway, how many cars can it fit?</p>
+    <select id="driveway" name="driveway" required>
+      <option value="">Select</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+
+    <h3>Clear Snow From These Areas</h3>
+    <label><input type="checkbox" name="snowAreas[]" value="Front walks and steps"> Front walks and steps</label>
+    <label><input type="checkbox" name="snowAreas[]" value="Corner city sidewalk"> Corner city sidewalk</label>
+    <label><input type="checkbox" name="snowAreas[]" value="Back path"> Back path</label>
+    <label><input type="checkbox" name="snowAreas[]" value="Side path"> Side path</label>
+    <label><input type="checkbox" name="snowAreas[]" value="Deck or patio"> Deck or patio</label>
+    <label><input type="checkbox" name="snowAreas[]" value="Driveway apron/approach"> Driveway apron/approach</label>
   </div>
   
   <input type="hidden" name="_subject" value="Test Submission">
