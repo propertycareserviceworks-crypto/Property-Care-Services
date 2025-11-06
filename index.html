@@ -15,7 +15,6 @@
     overflow-x: hidden;
   }
 
-  /* Background video */
   .bg-video {
     position: fixed;
     top: 0; left: 0;
@@ -33,7 +32,6 @@
     z-index: -1;
   }
 
-  /* Hamburger menu */
   .hamburger {
     position: fixed;
     top: 20px;
@@ -43,7 +41,6 @@
     cursor: pointer;
     z-index: 10;
   }
-
   .hamburger div {
     width: 100%;
     height: 4px;
@@ -66,17 +63,15 @@
     transition: 0.3s ease;
     z-index: 9;
   }
-
   .menu a {
     text-decoration: none;
     color: #1e293b;
     margin: 10px 0;
     font-weight: 500;
+    cursor: pointer;
   }
-
   .menu.show { right: 0; }
 
-  /* Container */
   .container {
     max-width: 650px;
     margin: 100px auto 50px;
@@ -88,7 +83,6 @@
   }
 
   h3 { color: #1e3a8a; margin-top: 25px; }
-
   input[type="text"], input[type="email"], input[type="tel"], select, textarea {
     width: 100%;
     padding: 10px 14px;
@@ -98,7 +92,6 @@
     font-size: 15px;
     transition: all 0.2s ease;
   }
-
   input:focus, select:focus, textarea:focus {
     border-color: #2563eb;
     outline: none;
@@ -119,7 +112,6 @@
     cursor: pointer;
     transition: 0.3s;
   }
-
   button:hover {
     background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
     transform: scale(1.02);
@@ -132,27 +124,57 @@
     border-radius: 8px;
     overflow: hidden;
   }
-
   th, td {
     border: 1px solid #cbd5e1;
     padding: 10px;
     text-align: left;
   }
-
   th {
     background-color: #eff6ff;
     color: #1e40af;
   }
-
   #priceDisplay {
     margin-top: 15px;
     font-weight: bold;
     color: #1E40AF;
   }
-
   .welcome-box {
     text-align: center;
     margin-top: 80px;
+  }
+
+  /* Modal styles */
+  .modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+  }
+  .modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    position: relative;
+  }
+  .modal-content img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 20px;
+    color: #475569;
+    cursor: pointer;
   }
 </style>
 </head>
@@ -169,10 +191,41 @@
   <div></div><div></div><div></div>
 </div>
 <div class="menu" id="menu">
-  <a href="#">Home</a>
-  <a href="#">Services</a>
-  <a href="#">About</a>
-  <a href="#">Contact</a>
+  <a onclick="openModal('aboutModal')">About</a>
+  <a onclick="openModal('servicesModal')">Services</a>
+  <a onclick="openModal('contactModal')">Contact</a>
+</div>
+
+<!-- Modals -->
+<div class="modal" id="aboutModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
+    <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="About Us">
+    <h2>About Property Care Service Works</h2>
+    <p>We specialize in reliable snow removal, lawn maintenance, and year-round property care, ensuring every job is done professionally and on time.</p>
+  </div>
+</div>
+
+<div class="modal" id="servicesModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('servicesModal')">&times;</span>
+    <h2>Our Services</h2>
+    <p>We offer a variety of packages to meet your needs:</p>
+    <ul style="text-align:left; margin:10px 0 0 20px;">
+      <li>❄️ Snow Removal (Basic, Premium, VIP)</li>
+      <li>🌿 Lawn Maintenance</li>
+      <li>🏠 Seasonal Yard Care</li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal" id="contactModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
+    <h2>Contact Us</h2>
+    <p>📞 Call or text us: <strong>[xxxxxx]</strong></p>
+    <p>📧 Email: propertycareserviceworks@gmail.com</p>
+  </div>
 </div>
 
 <div class="welcome-box">
@@ -184,6 +237,7 @@
   </p>
 </div>
 
+<!-- Form -->
 <div class="container">
 <form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
 
@@ -242,7 +296,6 @@
   <h3>Price Details</h3>
   <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
 
-  <!-- Hidden Fields -->
   <input type="hidden" name="houseServiceFee" id="houseServiceFee">
   <input type="hidden" name="drivewayFee" id="drivewayFee">
   <input type="hidden" name="cornerSidewalkFee" id="cornerSidewalkFee">
@@ -267,6 +320,12 @@ Below is the information we received along with the detailed price breakdown:">
 <script>
 function toggleMenu() {
   document.getElementById('menu').classList.toggle('show');
+}
+function openModal(id) {
+  document.getElementById(id).style.display = 'flex';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
 }
 
 const prices = {
@@ -309,7 +368,6 @@ function updatePrice() {
   let total = basePrice;
   const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
-  // Driveway Fee
   let drivewayFeeText = '';
   if (driveway > 2) {
     for (let i = 3; i <= driveway; i++) {
@@ -319,34 +377,27 @@ function updatePrice() {
     }
   }
 
-  // Corner sidewalk fee
   let cornerSidewalkFee = (cornerSidewalk === "Yes") ? 30 : 0;
   if (cornerSidewalkFee > 0) fees.push({ item: "Corner Sidewalk", price: cornerSidewalkFee });
   total += cornerSidewalkFee;
 
-  // Side path fee
   let sidePathFee = (sidePath === "Yes") ? 30 : 0;
   if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
   total += sidePathFee;
 
-  // Hidden fields
   houseServiceFeeField.value = `${house} - ${service} Service: $${basePrice}`;
   drivewayFeeField.value = drivewayFeeText.trim();
   cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee}` : '';
   sidePathFeeField.value = sidePathFee > 0 ? `Side Path: $${sidePathFee}` : '';
   totalPriceField.value = total;
 
-  // Display table
   let tableHTML = `<table>
     <tr><th>Item</th><th>Price ($)</th></tr>`;
-  fees.forEach(fee => {
-    tableHTML += `<tr><td>${fee.item}</td><td>${fee.price}</td></tr>`;
-  });
+  fees.forEach(fee => { tableHTML += `<tr><td>${fee.item}</td><td>${fee.price}</td></tr>`; });
   tableHTML += `<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
   priceDisplay.innerHTML = tableHTML;
 }
 
-// Event listeners
 houseRadios.forEach(radio => radio.addEventListener('change', updatePrice));
 serviceRadios.forEach(radio => radio.addEventListener('change', updatePrice));
 drivewaySelect.addEventListener('change', updatePrice);
