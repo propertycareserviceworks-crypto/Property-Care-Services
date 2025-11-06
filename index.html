@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -54,10 +54,6 @@
     <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
     <label><input type="radio" name="front_walks" value="No" required> No</label>
 
-    <p>Deck or patio:</p>
-    <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
-    <label><input type="radio" name="deck_patio" value="No" required> No</label>
-
     <p>Corner city sidewalk:</p>
     <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
     <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
@@ -66,6 +62,10 @@
     <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
     <label><input type="radio" name="side_path" value="No" required> No</label>
 
+    <p>Deck or patio:</p>
+    <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
+    <label><input type="radio" name="deck_patio" value="No" required> No</label>
+
     <h3>Additional Notes</h3>
     <textarea name="notes" rows="4" cols="50" placeholder="Enter any notes here..."></textarea>
 
@@ -73,12 +73,25 @@
     <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
   </div>
 
-  <!-- Hidden field for total price to show in autoresponse -->
+  <!-- Hidden fields for autoresponse breakdown -->
+  <input type="hidden" name="houseServiceFee" id="houseServiceFee" value="">
+  <input type="hidden" name="drivewayFee" id="drivewayFee" value="">
+  <input type="hidden" name="cornerSidewalkFee" id="cornerSidewalkFee" value="">
+  <input type="hidden" name="sidePathFee" id="sidePathFee" value="">
   <input type="hidden" name="totalPrice" id="totalPrice" value="">
 
   <input type="hidden" name="_subject" value="Service Request Submission">
   <input type="hidden" name="_autoresponse" 
-         value="Thank you for choosing our service. We have received your request. Your estimated total is ${{totalPrice}}. We will reach out shortly to confirm your service. If you have any questions, please text or call us at [xxxxxx] or reply to this email.">
+         value="Thank you for choosing our service. Here is your estimated price breakdown:
+
+{{houseServiceFee}}
+{{drivewayFee}}
+{{cornerSidewalkFee}}
+{{sidePathFee}}
+
+Total: ${{totalPrice}}
+
+We will reach out shortly to confirm your service. If you have any questions, please text or call us at [xxxxxx] or reply to this email.">
   <input type="hidden" name="_template" value="table">
   <input type="hidden" name="_captcha" value="true">
   
@@ -97,6 +110,12 @@ const drivewaySelect = document.getElementById('driveway');
 const cornerSidewalkRadios = document.querySelectorAll('input[name="corner_sidewalk"]');
 const sidePathRadios = document.querySelectorAll('input[name="side_path"]');
 const priceDisplay = document.getElementById('priceDisplay');
+
+// Hidden fields for autoresponse
+const houseServiceFeeField = document.getElementById('houseServiceFee');
+const drivewayFeeField = document.getElementById('drivewayFee');
+const cornerSidewalkFeeField = document.getElementById('cornerSidewalkFee');
+const sidePathFeeField = document.getElementById('sidePathFee');
 const totalPriceField = document.getElementById('totalPrice');
 
 function getSelectedValue(radioNodeList) {
@@ -122,10 +141,12 @@ function updatePrice() {
   const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
   // Driveway Fee: $15 per car beyond 2
+  let drivewayFeeText = '';
   if (driveway > 2) {
     for (let i = 3; i <= driveway; i++) {
       fees.push({ item: `Driveway Car ${i} Fee`, price: 15 });
       total += 15;
+      drivewayFeeText += `Driveway Car ${i} Fee: $15\n`;
     }
   }
 
@@ -139,7 +160,11 @@ function updatePrice() {
   if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
   total += sidePathFee;
 
-  // Update hidden totalPrice field for autoresponse
+  // Update hidden fields for autoresponse
+  houseServiceFeeField.value = `${house} - ${service} Service: $${basePrice}`;
+  drivewayFeeField.value = drivewayFeeText.trim();
+  cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee}` : '';
+  sidePathFeeField.value = sidePathFee > 0 ? `Side Path: $${sidePathFee}` : '';
   totalPriceField.value = total;
 
   // Build table HTML for your email
