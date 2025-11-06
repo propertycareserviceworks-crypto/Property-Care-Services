@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,6 +8,9 @@
   label { display: block; margin: 8px 0; }
   .form-list h3 { margin-top: 20px; }
   #priceDisplay { margin-top: 15px; font-weight: bold; color: #1E40AF; }
+  table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+  th, td { border: 1px solid #1E40AF; padding: 5px; text-align: left; }
+  th { background-color: #e0e7ff; }
 </style>
 </head>
 <body>
@@ -34,7 +38,7 @@
     <label><input type="radio" name="serviceType" value="Premium"> Premium</label>
     <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
 
-     <h3>Driveway Spaces</h3>
+    <h3>Driveway Spaces</h3>
     <p>If you have a driveway, how many cars can it fit?</p>
     <select id="driveway" name="driveway" required>
       <option value="">Select</option>
@@ -46,29 +50,29 @@
     </select>
 
     <h3>Clear Snow From These Areas</h3>
-  <p>Front walks and steps:</p>
-  <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
-  <label><input type="radio" name="front_walks" value="No" required> No</label>
+    <p>Front walks and steps:</p>
+    <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
+    <label><input type="radio" name="front_walks" value="No" required> No</label>
 
-  <p>Corner city sidewalk:</p>
-  <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
-  <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
+    <p>Corner city sidewalk:</p>
+    <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
+    <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
 
-  <p>Side path:</p>
-  <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
-  <label><input type="radio" name="side_path" value="No" required> No</label>
+    <p>Side path:</p>
+    <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
+    <label><input type="radio" name="side_path" value="No" required> No</label>
 
-  <p>Deck or patio:</p>
-  <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
-  <label><input type="radio" name="deck_patio" value="No" required> No</label>
+    <p>Deck or patio:</p>
+    <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
+    <label><input type="radio" name="deck_patio" value="No" required> No</label>
 
-</select>
+    <h3>Additional Notes</h3>
+    <textarea name="notes" rows="4" cols="50" placeholder="Enter any notes here..."></textarea>
 
     <h3>Price Details</h3>
     <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
-    
   </div>
-  
+
   <input type="hidden" name="_subject" value="Test Submission">
   <input type="hidden" name="_autoresponse" 
          value="Thank you for your message. This is a test autoresponse from Property Care Service Works.">
@@ -79,17 +83,6 @@
 </form>
 
 <script>
-  const select = document.getElementById('areas');
-
-  // Allow click to select/deselect options without Ctrl
-  select.addEventListener('mousedown', function(e) {
-    e.preventDefault();
-    const option = e.target;
-    option.selected = !option.selected;
-  });
-</script>
-
-<script>
 const prices = {
   "Lane House / Town House": { "Basic": 120, "Premium": 150, "V.I.P": 180 },
   "Attached Garage": { "Basic": 120, "Premium": 150, "V.I.P": 180 }
@@ -97,21 +90,80 @@ const prices = {
 
 const houseRadios = document.querySelectorAll('input[name="houseType"]');
 const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
+const drivewaySelect = document.getElementById('driveway');
+const frontWalksRadios = document.querySelectorAll('input[name="front_walks"]');
+const cornerSidewalkRadios = document.querySelectorAll('input[name="corner_sidewalk"]');
+const sidePathRadios = document.querySelectorAll('input[name="side_path"]');
+const deckPatioRadios = document.querySelectorAll('input[name="deck_patio"]');
 const priceDisplay = document.getElementById('priceDisplay');
 
-function updatePrice() {
-  const house = document.querySelector('input[name="houseType"]:checked');
-  const service = document.querySelector('input[name="serviceType"]:checked');
-  if(house && service) {
-    const price = prices[house.value][service.value];
-    priceDisplay.textContent = `${house.value} - ${service.value} Service: $${price}`;
-  } else {
-    priceDisplay.textContent = "Select a House Type and Service Type to see the price.";
-  }
+function getSelectedValue(radioNodeList) {
+  const selected = document.querySelector(`input[name="${radioNodeList[0].name}"]:checked`);
+  return selected ? selected.value : null;
 }
 
+function updatePrice() {
+  const house = getSelectedValue(houseRadios);
+  const service = getSelectedValue(serviceRadios);
+  const driveway = drivewaySelect.value;
+  const frontWalks = getSelectedValue(frontWalksRadios);
+  const cornerSidewalk = getSelectedValue(cornerSidewalkRadios);
+  const sidePath = getSelectedValue(sidePathRadios);
+  const deckPatio = getSelectedValue(deckPatioRadios);
+
+  if (!house || !service) {
+    priceDisplay.innerHTML = "Select a House Type and Service Type to see the price.";
+    return;
+  }
+
+  let basePrice = prices[house][service];
+  let total = basePrice;
+  const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
+
+  // Driveway Fee
+  let drivewayFee = (driveway > 2) ? 15 : 0;
+  if (drivewayFee > 0) fees.push({ item: `Additional Driveway Fee`, price: drivewayFee });
+  total += drivewayFee;
+
+  // Front Walks Fee
+  let frontWalksFee = (frontWalks === "Yes") ? 30 : 0;
+  if (frontWalksFee > 0) fees.push({ item: "Front Walks and Steps", price: frontWalksFee });
+  total += frontWalksFee;
+
+  // Corner Sidewalk Fee
+  let cornerSidewalkFee = (cornerSidewalk === "Yes") ? 30 : 0;
+  if (cornerSidewalkFee > 0) fees.push({ item: "Corner Sidewalk", price: cornerSidewalkFee });
+  total += cornerSidewalkFee;
+
+  // Side Path Fee
+  let sidePathFee = (sidePath === "Yes") ? 30 : 0;
+  if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
+  total += sidePathFee;
+
+  // Deck or Patio Fee
+  let deckFee = (deckPatio === "Yes") ? 30 : 0;
+  if (deckFee > 0) fees.push({ item: "Deck or Patio", price: deckFee });
+  total += deckFee;
+
+  // Build table HTML
+  let tableHTML = `<table>
+    <tr><th>Item</th><th>Price ($)</th></tr>`;
+  fees.forEach(fee => {
+    tableHTML += `<tr><td>${fee.item}</td><td>${fee.price}</td></tr>`;
+  });
+  tableHTML += `<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr>`;
+  tableHTML += `</table>`;
+
+  priceDisplay.innerHTML = tableHTML;
+}
+
+// Event listeners
 houseRadios.forEach(radio => radio.addEventListener('change', updatePrice));
 serviceRadios.forEach(radio => radio.addEventListener('change', updatePrice));
+drivewaySelect.addEventListener('change', updatePrice);
+[frontWalksRadios, cornerSidewalkRadios, sidePathRadios, deckPatioRadios].forEach(group => {
+  group.forEach(radio => radio.addEventListener('change', updatePrice));
+});
 </script>
 </body>
 </html>
