@@ -1,134 +1,17 @@
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Request Service Form</title>
-  <style>
-    body {
-      font-family: Arial, sans‑serif;
-      padding: 20px;
-      background: #f5f5f5;
-    }
-    .container {
-      max‑width: 600px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border‑radius: 8px;
-    }
-    h2 {
-      margin‑bottom: 10px;
-    }
-    label {
-      display: block;
-      margin: 15px 0 5px;
-    }
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border‑radius: 4px;
-    }
-    .checkboxes label {
-      display: block;
-      margin‑bottom: 5px;
-    }
-    .radio‑group label {
-      margin‑right: 15px;
-    }
-    button {
-      background‑color: #007BFF;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border‑radius: 4px;
-      cursor: pointer;
-      margin‑top: 20px;
-    }
-    button:hover {
-      background‑color: #0056b3;
-    }
-    .row {
-      display: flex;
-      gap: 10px;
-    }
-    .row > div {
-      flex: 1;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>FormSubmit Autoresponse Test</title>
 </head>
 <body>
-  <div class="container">
-    <h2>Service Request Form</h2>
-    <form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="Service Request Submission">
-      <input type="hidden" name="_autoresponse"
-             value="Thank you for your message. We’ll be in touch shortly.">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="true">
-
-      <label for="fullname">Full Name</label>
-      <input type="text" id="fullname" name="Full Name" required>
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="Email" required>
-
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="Phone Number" required>
-
-      <label for="address">Address</label>
-      <input type="text" id="address" name="Address" required>
-
-      <label for="location">Location</label>
-      <select id="location" name="Location" required>
-        <option value="" disabled selected>-- Select Location --</option>
-        <option value="Vancouver">Vancouver</option>
-        <option value="Burnaby">Burnaby</option>
-        <option value="Richmond">Richmond</option>
-      </select>
-
-      <label for="houseinfo">House Info</label>
-      <select id="houseinfo" name="House Info" required>
-        <option value="" disabled selected>-- Select Type --</option>
-        <option value="Lane House">Lane House</option>
-        <option value="Town House">Town House</option>
-        <option value="Attached Garage">Attached Garage</option>
-        <option value="Acreage">Acreage</option>
-      </select>
-
-      <label for="serviceType">Service Type</label>
-      <div class="radio‑group">
-        <label><input type="radio" name="Service Type" value="Basic" required> Basic</label>
-        <label><input type="radio" name="Service Type" value="Premium"> Premium</label>
-        <label><input type="radio" name="Service Type" value="VIP"> V.I.P</label>
-      </div>
-
-      <label for="drivewaySpaces">Driveway Spaces (How many cars can it fit?)</label>
-      <select id="drivewaySpaces" name="Driveway Spaces" required>
-        <option value="" disabled selected>-- Select --</option>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-
-      <label>Clear Snow From These Areas:</label>
-      <div class="checkboxes">
-        <label><input type="checkbox" name="Clear Areas" value="Front walks and steps"> Front walks and steps</label>
-        <label><input type="checkbox" name="Clear Areas" value="Corner city sidewalk"> Corner city sidewalk</label>
-        <label><input type="checkbox" name="Clear Areas" value="Back path"> Back path</label>
-        <label><input type="checkbox" name="Clear Areas" value="Side path"> Side path</label>
-        <label><input type="checkbox" name="Clear Areas" value="Deck or patio"> Deck or patio</label>
-        <label><input type="checkbox" name="Clear Areas" value="Driveway apron/approach"> Driveway apron/approach</label>
-      </div>
-
-      <button type="submit">Confirm & Submit</button>
-      <button type="reset">Cancel</button>
-    </form>
-  </div>
+<form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
+  <input type="email" name="email" placeholder="Your Email" required>
+  <input type="hidden" name="_subject" value="Test Submission">
+  <input type="hidden" name="_autoresponse" 
+         value="Thank you for your message. This is a test autoresponse from Property Care Service Works.">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="true">
+  <button type="submit">Send Test</button>
+</form>
 </body>
 </html>
