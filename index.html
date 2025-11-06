@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,196 +11,79 @@
     color: #1e293b;
     line-height: 1.5;
     min-height: 100vh;
-    position: relative;
     overflow-x: hidden;
   }
 
   .bg-video {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; top:0; left:0;
     width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -2;
+    object-fit: cover; z-index: -2;
   }
 
   .overlay {
-    position: fixed;
-    top: 0; left: 0;
+    position: fixed; top:0; left:0;
     width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255,255,255,0.7);
     backdrop-filter: blur(10px);
     z-index: -1;
   }
 
   .hamburger {
-    position: fixed;
-    top: 20px;
-    right: 25px;
-    width: 30px;
-    height: 22px;
-    cursor: pointer;
-    z-index: 10;
+    position: fixed; top: 20px; right: 25px;
+    width: 30px; height: 22px;
+    cursor: pointer; z-index: 10;
   }
-  .hamburger div {
-    width: 100%;
-    height: 4px;
-    background-color: #1e293b;
-    margin: 4px 0;
-    border-radius: 2px;
-    transition: 0.3s;
-  }
+  .hamburger div { width: 100%; height: 4px; background: #1e293b; margin: 4px 0; border-radius: 2px; transition: 0.3s; }
 
   .menu {
-    position: fixed;
-    top: 0; right: -220px;
-    width: 200px;
-    height: 100%;
+    position: fixed; top: 0; right: -220px;
+    width: 200px; height: 100%;
     background: rgba(255,255,255,0.95);
-    box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-    padding: 60px 20px;
-    display: flex;
-    flex-direction: column;
-    transition: 0.3s ease;
-    z-index: 9;
-    overflow-y: auto;  /* Make menu scrollable */
-  }
-  .menu a {
-    text-decoration: none;
-    color: #1e293b;
-    margin: 10px 0;
-    font-weight: 500;
-    cursor: pointer;
+    padding: 60px 20px; display: flex; flex-direction: column;
+    transition: 0.3s ease; z-index: 9; overflow-y: auto;
   }
   .menu.show { right: 0; }
+  .menu a { margin: 10px 0; color: #1e293b; text-decoration: none; font-weight: 500; cursor: pointer; }
 
   .container {
-    max-width: 650px;
-    margin: 100px auto 50px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    padding: 30px 40px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    backdrop-filter: blur(20px);
+    max-width: 650px; margin: 120px auto 50px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 20px; padding: 30px 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15); backdrop-filter: blur(20px);
   }
 
   h3 { color: #1e3a8a; margin-top: 25px; }
-  input[type="text"], input[type="email"], input[type="tel"], select, textarea {
-    width: 100%;
-    padding: 10px 14px;
-    margin: 8px 0 16px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    font-size: 15px;
-    transition: all 0.2s ease;
+  input, select, textarea {
+    width: 100%; padding: 10px 14px; margin: 8px 0 16px;
+    border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px;
   }
-  input:focus, select:focus, textarea:focus {
-    border-color: #2563eb;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
-  }
-
+  input:focus, select:focus, textarea:focus { border-color: #2563eb; outline:none; box-shadow:0 0 0 2px rgba(37,99,235,0.3); }
   label { display: block; margin-top: 10px; }
 
   button {
-    background: linear-gradient(135deg, #2563eb, #1e40af);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 20px;
-    width: 100%;
-    font-size: 16px;
-    margin-top: 25px;
-    cursor: pointer;
-    transition: 0.3s;
+    background: linear-gradient(135deg, #2563eb,#1e40af);
+    color:white; border:none; border-radius:12px;
+    padding:12px; width:100%; font-size:16px; margin-top:25px; cursor:pointer;
   }
-  button:hover {
-    background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
-    transform: scale(1.02);
-  }
+  button:hover { background: linear-gradient(135deg,#1d4ed8,#1e3a8a); transform:scale(1.02); }
 
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  th, td {
-    border: 1px solid #cbd5e1;
-    padding: 10px;
-    text-align: left;
-  }
-  th {
-    background-color: #eff6ff;
-    color: #1e40af;
-  }
-  #priceDisplay {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #1E40AF;
-  }
-  .welcome-box {
-    text-align: center;
-    margin-top: 80px;
-  }
+  #priceDisplay { margin-top:15px; font-weight:bold; color:#1e40af; }
 
-  /* Modal styles */
-  .modal {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
-    overflow-y: auto;  /* Allow scroll if modal too tall */
-  }
-  .modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    position: relative;
-    overflow-y: auto; /* Scrollable content */
-    max-height: 90vh;
-    margin: 40px 10px;
-  }
-  .modal-content img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 15px;
-  }
-  .close-btn {
-    position: absolute;
-    top: 10px; right: 15px;
-    font-size: 20px;
-    color: #475569;
-    cursor: pointer;
-  }
-
-  @media (max-width: 768px) {
-    .menu {
-      padding-top: 80px;
-    }
-  }
+  /* Modals */
+  .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:20; overflow-y:auto; }
+  .modal-content { background:white; padding:30px; border-radius:15px; max-width:500px; width:90%; text-align:center; box-shadow:0 5px 20px rgba(0,0,0,0.2); position:relative; max-height:90vh; overflow-y:auto; }
+  .close-btn { position:absolute; top:10px; right:15px; font-size:20px; color:#475569; cursor:pointer; }
+  .modal-content img { width:100%; border-radius:10px; margin-bottom:15px; }
 </style>
 </head>
 <body>
 
-<!-- Background -->
 <video class="bg-video" autoplay muted loop playsinline>
   <source src="https://ik.imagekit.io/uiffzsgnp/istockphoto-1470507283-640_adpp_is.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
 
-<!-- Hamburger Menu -->
-<div class="hamburger" onclick="toggleMenu()">
-  <div></div><div></div><div></div>
-</div>
+<div class="hamburger" onclick="toggleMenu()"><div></div><div></div><div></div></div>
 <div class="menu" id="menu">
   <a onclick="openModal('aboutModal'); closeMenu()">About</a>
   <a onclick="openModal('serviceModal'); closeMenu()">Services</a>
@@ -207,67 +91,98 @@
 </div>
 
 <!-- Modals -->
-<div class="modal" id="aboutModal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
-    <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="About Us">
-    <h2>About Property Care Service Works</h2>
-    <p>We currently specialize in reliable snow removal services, ensuring every job is completed professionally and on time. Lawn maintenance and year-round property care services will be available soon as we continue to expand our offerings.</p>
-  </div>
-</div>
+<div class="modal" id="aboutModal"><div class="modal-content"><span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
+<img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="About Us">
+<h2>About Property Care Service Works</h2>
+<p>We specialize in reliable snow removal services...</p>
+</div></div>
 
-<div class="modal" id="serviceModal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('serviceModal')">&times;</span>
-    <h2>Our Services</h2>
-    <p>We offer a variety of packages to meet your needs:</p>
-    ❄️ Snow Removal (Basic, Premium, VIP)
-    <h3>Service Details</h3>
-    <p>• First wave clearing during heavy snowfalls: early morning (before 7 AM) or afternoon, depending on when the snow occurs, to keep walkways accessible during the day.</p>
-    <p><strong>Basic</strong><br>• Snow cleared within 24 hours after snowfall ends<br>• Second clearing for snow > 2.5 cm (1 in)<br>• Up to 1 visit per 24 hours during heavy or ongoing snowfall<br>• Ideal for clients seeking reliable, cost-effective service</p>
-    <p><strong>Premium</strong><br>• Snow cleared within 12 hours after snowfall ends<br>• First wave clearing during heavy snowfalls (before 7 AM or afternoon)<br>• Second clearing same day for snow > 2.5 cm (1 in)<br>• Up to 2 visits per 24 hours during active snowfall<br>• Designed for customers who want faster access and added convenience</p>
-    <p><strong>VIP</strong><br>• Snow cleared within 6 hours after snowfall ends<br>• Priority first wave clearing (early morning or as soon as snow stops)<br>• Second clearing same day for snow > 2.5 cm (1 in), plus an extra visit if snowfall exceeds 5 cm (2 in)<br>• Up to 3 visits per 24 hours during heavy snowfall<br>• Perfect for clients seeking the fastest response and peace of mind</p>
-  </div>
-</div>
+<div class="modal" id="serviceModal"><div class="modal-content"><span class="close-btn" onclick="closeModal('serviceModal')">&times;</span>
+<h2>Our Services</h2>
+<p>❄️ Snow Removal (Basic, Premium, VIP)</p>
+<p>Service Details...</p>
+</div></div>
 
-<div class="modal" id="contactModal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
-    <h2>Contact Us</h2>
-    <p>📞 Call or text us: <strong>(639) 916-0667</strong></p>
-    <p>📧 Email: propertycareserviceworks@gmail.com</p>
-  </div>
+<div class="modal" id="contactModal"><div class="modal-content"><span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
+<h2>Contact Us</h2>
+<p>📞 (639) 916-0667</p><p>📧 propertycareserviceworks@gmail.com</p>
+</div></div>
+
+<div class="container">
+<form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
+  <label>Full Name:</label><input type="text" name="name" required>
+  <label>Email:</label><input type="email" name="email" required>
+  <label>Address:</label><input type="text" name="address" required>
+  <label>Phone Number:</label><input type="tel" name="phone" required>
+
+  <h3>House Info</h3>
+  <label><input type="radio" name="houseType" value="Lane House / Town House" required> Lane House / Town House</label>
+  <label><input type="radio" name="houseType" value="Attached Garage"> Attached Garage</label>
+
+  <h3>Service Type</h3>
+  <label><input type="radio" name="serviceType" value="Basic" required> Basic</label>
+  <label><input type="radio" name="serviceType" value="Premium"> Premium</label>
+  <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
+
+  <h3>Driveway Spaces</h3>
+  <select id="driveway" name="driveway" required>
+    <option value="">Select</option><option value="0">0</option><option value="1">1</option>
+    <option value="2">2</option><option value="3">3</option><option value="4">4</option>
+  </select>
+
+  <h3>Additional Notes</h3><textarea name="notes" rows="4"></textarea>
+
+  <h3>Price Details</h3><p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
+
+  <input type="hidden" name="houseServiceFee" id="houseServiceFee">
+  <input type="hidden" name="drivewayFee" id="drivewayFee">
+  <input type="hidden" name="totalPrice" id="totalPrice">
+
+  <input type="hidden" name="_subject" value="Service Request Submission">
+  <input type="hidden" name="_autoresponse" value="This is an automated response. Thank you!">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="true">
+
+  <button type="submit">Confirm Request</button>
+</form>
 </div>
 
 <script>
 function toggleMenu() {
   const menu = document.getElementById('menu');
   menu.classList.toggle('show');
-  // Lock background scroll when menu open
-  if(menu.classList.contains('show')) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
+  document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : '';
+}
+function closeMenu() { document.getElementById('menu').classList.remove('show'); document.body.style.overflow=''; }
+function openModal(id){ document.getElementById(id).style.display='flex'; document.body.style.overflow='hidden'; }
+function closeModal(id){ document.getElementById(id).style.display='none'; document.body.style.overflow=''; }
+
+// Price calculation
+const prices = { "Lane House / Town House": { "Basic":120, "Premium":150,"V.I.P":180 }, "Attached Garage": { "Basic":150,"Premium":180,"V.I.P":210 }};
+const houseRadios = document.querySelectorAll('input[name="houseType"]');
+const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
+const drivewaySelect = document.getElementById('driveway');
+const priceDisplay = document.getElementById('priceDisplay');
+const houseServiceFeeField = document.getElementById('houseServiceFee');
+const drivewayFeeField = document.getElementById('drivewayFee');
+const totalPriceField = document.getElementById('totalPrice');
+
+function getSelectedValue(radios){ const sel = document.querySelector(`input[name="${radios[0].name}"]:checked`); return sel?sel.value:null; }
+
+function updatePrice(){
+  const house=getSelectedValue(houseRadios); const service=getSelectedValue(serviceRadios); const driveway=parseInt(drivewaySelect.value)||0;
+  if(!house||!service){ priceDisplay.innerHTML="Select a House Type and Service Type to see the price."; totalPriceField.value=""; return; }
+  let base=prices[house][service]; let total=base; let fees=[{item:`${house} - ${service} Service`,price:base}];
+  let drivewayText='';
+  if(driveway>2){ for(let i=3;i<=driveway;i++){ fees.push({item:`Driveway Car ${i} Fee`,price:15}); total+=15; drivewayText+=`Driveway Car ${i} Fee: $15\n`; }}
+  houseServiceFeeField.value=`${house} - ${service} Service: $${base}`;
+  drivewayFeeField.value=drivewayText.trim(); totalPriceField.value=total;
+  let tableHTML=`<table><tr><th>Item</th><th>Price ($)</th></tr>`; fees.forEach(f=>{tableHTML+=`<tr><td>${f.item}</td><td>${f.price}</td></tr>`}); tableHTML+=`<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
+  priceDisplay.innerHTML=tableHTML;
 }
 
-function closeMenu() {
-  document.getElementById('menu').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function openModal(id) {
-  const modal = document.getElementById(id);
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden'; // Prevent background scroll
-}
-
-function closeModal(id) {
-  const modal = document.getElementById(id);
-  modal.style.display = 'none';
-  document.body.style.overflow = ''; // Restore scroll
-}
+[...houseRadios,...serviceRadios].forEach(r=>r.addEventListener('change',updatePrice));
+drivewaySelect.addEventListener('change',updatePrice);
 </script>
-
 </body>
 </html>
