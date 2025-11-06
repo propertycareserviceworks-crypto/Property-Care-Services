@@ -1,90 +1,114 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Snow Removal Form</title>
-<style>
-/* ... keep all your existing styles here ... */
-</style>
+  <meta charset="UTF-8">
+  <title>Request Service Form</title>
+  <style>
+    body {
+      font-family: Arial, sans‑serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      max‑width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border‑radius: 8px;
+    }
+    h2 {
+      margin‑bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border‑radius: 4px;
+    }
+    .checkboxes label {
+      display: block;
+      margin‑bottom: 5px;
+    }
+    .radio‑group label {
+      margin‑right: 15px;
+    }
+    button {
+      background‑color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border‑radius: 4px;
+      cursor: pointer;
+      margin‑top: 20px;
+    }
+    button:hover {
+      background‑color: #0056b3;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+    .row > div {
+      flex: 1;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h2>Service Request Form</h2>
+    <form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Service Request Submission">
+      <input type="hidden" name="_autoresponse"
+             value="Thank you for your message. We’ll be in touch shortly.">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="true">
 
-<video class="bg-video" autoplay muted loop playsinline>
-  <source src="https://ik.imagekit.io/uiffzsgnp/istockphoto-1470507283-640_adpp_is.mp4" type="video/mp4">
-</video>
-<div class="overlay"></div>
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="Full Name" required>
 
-<div class="welcome-box">
-  <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg"
-       alt="Snow Removal Banner"
-       style="width: 100%; max-width: 800px; border-radius: 12px; margin: 0 0 20px 0; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
-  <p>Fill out our request form below to get started!</p>
-</div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="Email" required>
 
-<div class="hamburger" id="hamburger" onclick="toggleMenu()">
-  <div></div><div></div><div></div>
-</div>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="Phone Number" required>
 
-<div class="menu" id="menu">
-  <h3>Service Details</h3>
-  <p><strong>Basic:</strong> Standard snow removal and driveway clearing.</p>
-  <p><strong>Premium:</strong> Walkway, driveway, and sidewalk service included.</p>
-  <p><strong>V.I.P:</strong> Full priority service + de-icing treatment.</p>
-  <h3>Contact Info</h3>
-  <p>📞 (123) 456-7890</p>
-  <p>📧 info@testbusiness.com</p>
-  <p>📍 Saskatoon, SK</p>
-  <button class="close-menu" onclick="toggleMenu()">Close</button>
-</div>
+      <label for="address">Address</label>
+      <input type="text" id="address" name="Address" required>
 
-<div class="box">
-  <form id="snowForm" action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
-    <!-- FormSubmit integration -->
-    <input type="hidden" name="_subject" value="New Snow Removal Request!">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_captcha" value="true">
-    <input type="hidden" id="autoresponseField" name="_autoresponse" value="">
-    <input type="hidden" id="message" name="message">
+      <label for="location">Location</label>
+      <select id="location" name="Location" required>
+        <option value="" disabled selected>-- Select Location --</option>
+        <option value="Vancouver">Vancouver</option>
+        <option value="Burnaby">Burnaby</option>
+        <option value="Richmond">Richmond</option>
+      </select>
 
-    <h2><center>Service Request Form</center></h2>
+      <label for="houseinfo">House Info</label>
+      <select id="houseinfo" name="House Info" required>
+        <option value="" disabled selected>-- Select Type --</option>
+        <option value="Lane House">Lane House</option>
+        <option value="Town House">Town House</option>
+        <option value="Attached Garage">Attached Garage</option>
+        <option value="Acreage">Acreage</option>
+      </select>
 
-    <label for="name">Full Name</label>
-    <input type="text" id="name" name="name" placeholder="Enter your name" required />
+      <label for="serviceType">Service Type</label>
+      <div class="radio‑group">
+        <label><input type="radio" name="Service Type" value="Basic" required> Basic</label>
+        <label><input type="radio" name="Service Type" value="Premium"> Premium</label>
+        <label><input type="radio" name="Service Type" value="VIP"> V.I.P</label>
+      </div>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" placeholder="Enter your email" required />
-
-    <label for="phone">Phone Number</label>
-    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required />
-
-    <label for="address">Address</label>
-    <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
-
-    <label for="location">Location</label>
-    <select id="location" name="location" required>
-      <option value="">-- Select Location --</option>
-      <option value="Rosewood">Rosewood</option>
-      <option value="Briarwood">Briarwood</option>
-      <option value="Lakeridge">Lakeridge</option>
-    </select>
-
-    <div class="form-list">
-      <h3>House Info</h3>
-      <label><input type="radio" name="houseType" value="Lane House / Town House" required>Lane House / Town House</label>
-      <label><input type="radio" name="houseType" value="Attached Garage">Attached Garage</label>
-      <label><input type="radio" name="houseType" value="Acreage">Acreage</label>
-
-      <h3>Service Type</h3>
-      <label><input type="radio" name="serviceType" value="Basic" required>Basic</label>
-      <label><input type="radio" name="serviceType" value="Premium">Premium</label>
-      <label><input type="radio" name="serviceType" value="V.I.P">V.I.P</label>
-    </div>
-
-    <div class="form-list">
-      <h3>Driveway Spaces</h3>
-      <p>If you have a driveway, how many cars can it fit?</p>
-      <select id="driveway" name="driveway">
+      <label for="drivewaySpaces">Driveway Spaces (How many cars can it fit?)</label>
+      <select id="drivewaySpaces" name="Driveway Spaces" required>
+        <option value="" disabled selected>-- Select --</option>
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -92,100 +116,19 @@
         <option value="4">4</option>
       </select>
 
-      <h3>Clear Snow From These Areas</h3>
-      <label><input type="checkbox" name="snowAreas[]" value="Front walks and steps">Front walks and steps</label>
-      <label><input type="checkbox" name="snowAreas[]" value="Corner city sidewalk">Corner city sidewalk</label>
-      <label><input type="checkbox" name="snowAreas[]" value="Back path">Back path</label>
-      <label><input type="checkbox" name="snowAreas[]" value="Side path">Side path</label>
-      <label><input type="checkbox" name="snowAreas[]" value="Deck or patio">Deck or patio</label>
-      <label><input type="checkbox" name="snowAreas[]" value="Driveway apron/approach">Driveway apron/approach</label>
-    </div>
+      <label>Clear Snow From These Areas:</label>
+      <div class="checkboxes">
+        <label><input type="checkbox" name="Clear Areas" value="Front walks and steps"> Front walks and steps</label>
+        <label><input type="checkbox" name="Clear Areas" value="Corner city sidewalk"> Corner city sidewalk</label>
+        <label><input type="checkbox" name="Clear Areas" value="Back path"> Back path</label>
+        <label><input type="checkbox" name="Clear Areas" value="Side path"> Side path</label>
+        <label><input type="checkbox" name="Clear Areas" value="Deck or patio"> Deck or patio</label>
+        <label><input type="checkbox" name="Clear Areas" value="Driveway apron/approach"> Driveway apron/approach</label>
+      </div>
 
-    <button type="button" id="checkPriceBtn">Check Price</button>
-  </form>
-</div>
-
-<div id="priceModal">
-  <div id="priceModalContent">
-    <h3>Price Breakdown</h3>
-    <div id="priceDetails"></div>
-    <p>Total: $<span id="totalPrice">0</span></p>
-    <button id="confirmBtn">Confirm & Submit</button>
-    <button id="cancelBtn">Cancel</button>
+      <button type="submit">Confirm & Submit</button>
+      <button type="reset">Cancel</button>
+    </form>
   </div>
-</div>
-
-<script>
-const form = document.getElementById('snowForm');
-const checkPriceBtn = document.getElementById('checkPriceBtn');
-const priceModal = document.getElementById('priceModal');
-const priceDetails = document.getElementById('priceDetails');
-const totalPriceEl = document.getElementById('totalPrice');
-const confirmBtn = document.getElementById('confirmBtn');
-const cancelBtn = document.getElementById('cancelBtn');
-const messageInput = document.getElementById('message');
-const autoresponseField = document.getElementById('autoresponseField');
-
-checkPriceBtn.addEventListener('click', () => {
-  let total = 0;
-  let breakdown = '';
-  let emailText = "Price Breakdown:\n";
-
-  const service = document.querySelector('input[name="serviceType"]:checked');
-  const house = document.querySelector('input[name="houseType"]:checked');
-
-  if (service && house) {
-    let price = 0;
-    if (house.value === "Lane House / Town House") {
-      price = service.value === "Basic" ? 120 : service.value === "Premium" ? 150 : 180;
-    } else if (house.value === "Attached Garage") {
-      price = service.value === "Basic" ? 150 : service.value === "Premium" ? 180 : 210;
-    } else if (house.value === "Acreage") {
-      price = service.value === "Basic" ? 180 : service.value === "Premium" ? 210 : 240;
-    }
-    total += price;
-    breakdown += `${house.value} - ${service.value}: $${price}<br>`;
-    emailText += `${house.value} - ${service.value}: $${price}\n`;
-  }
-
-  const drivewayCount = parseInt(document.getElementById('driveway').value) || 0;
-  if (drivewayCount > 0) {
-    const drivewayFee = drivewayCount * 10;
-    total += drivewayFee;
-    breakdown += `Driveway spaces (${drivewayCount}): $${drivewayFee}<br>`;
-    emailText += `Driveway spaces (${drivewayCount}): $${drivewayFee}\n`;
-  }
-
-  const areas = document.querySelectorAll('input[name="snowAreas[]"]:checked');
-  areas.forEach(area => {
-    let areaFee = area.value !== "Front walks and steps" ? 10 : 0;
-    if (areaFee > 0) {
-      breakdown += `${area.value}: $${areaFee}<br>`;
-      emailText += `${area.value}: $${areaFee}\n`;
-      total += areaFee;
-    }
-  });
-
-  emailText += `Total: $${total}`;
-  priceDetails.innerHTML = breakdown;
-  totalPriceEl.textContent = total;
-  priceModal.style.display = 'flex';
-
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-
-  messageInput.value = emailText;
-  autoresponseField.value =
-    `Hello ${name},\n\nThank you for your snow removal request!\nHere is your price summary:\n\n${emailText}\n\nWe'll contact you soon.\n\n- Property Care Service Works`;
-});
-
-cancelBtn.addEventListener('click', () => priceModal.style.display = 'none');
-confirmBtn.addEventListener('click', () => { priceModal.style.display = 'none'; form.submit(); });
-
-function toggleMenu() {
-  document.getElementById('menu').classList.toggle('active');
-  document.getElementById('hamburger').classList.toggle('active');
-}
-</script>
 </body>
 </html>
