@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>FormSubmit Autoresponse Test</title>
+<title>Property Care Service Form</title>
 <style>
   body { font-family: Arial, sans-serif; line-height: 1.5; padding: 20px; }
   label { display: block; margin: 8px 0; }
@@ -54,6 +54,10 @@
     <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
     <label><input type="radio" name="front_walks" value="No" required> No</label>
 
+    <p>Deck or patio:</p>
+    <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
+    <label><input type="radio" name="deck_patio" value="No" required> No</label>
+
     <p>Corner city sidewalk:</p>
     <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
     <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
@@ -62,10 +66,6 @@
     <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
     <label><input type="radio" name="side_path" value="No" required> No</label>
 
-    <p>Deck or patio:</p>
-    <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
-    <label><input type="radio" name="deck_patio" value="No" required> No</label>
-
     <h3>Additional Notes</h3>
     <textarea name="notes" rows="4" cols="50" placeholder="Enter any notes here..."></textarea>
 
@@ -73,13 +73,16 @@
     <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
   </div>
 
-  <input type="hidden" name="_subject" value="Test Submission">
+  <!-- Hidden field for total price to show in autoresponse -->
+  <input type="hidden" name="totalPrice" id="totalPrice" value="">
+
+  <input type="hidden" name="_subject" value="Service Request Submission">
   <input type="hidden" name="_autoresponse" 
-         value="Thank you for your message. This is a test autoresponse from Property Care Service Works.">
+         value="Thank you for choosing our service. We have received your request. Your estimated total is ${{totalPrice}}. We will reach out shortly to confirm your service. If you have any questions, please text or call us at [xxxxxx] or reply to this email.">
   <input type="hidden" name="_template" value="table">
   <input type="hidden" name="_captcha" value="true">
   
-  <button type="submit">Send Test</button>
+  <button type="submit">Confirm Request</button>
 </form>
 
 <script>
@@ -94,6 +97,7 @@ const drivewaySelect = document.getElementById('driveway');
 const cornerSidewalkRadios = document.querySelectorAll('input[name="corner_sidewalk"]');
 const sidePathRadios = document.querySelectorAll('input[name="side_path"]');
 const priceDisplay = document.getElementById('priceDisplay');
+const totalPriceField = document.getElementById('totalPrice');
 
 function getSelectedValue(radioNodeList) {
   const selected = document.querySelector(`input[name="${radioNodeList[0].name}"]:checked`);
@@ -109,6 +113,7 @@ function updatePrice() {
 
   if (!house || !service) {
     priceDisplay.innerHTML = "Select a House Type and Service Type to see the price.";
+    totalPriceField.value = "";
     return;
   }
 
@@ -116,7 +121,7 @@ function updatePrice() {
   let total = basePrice;
   const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
-  // Driveway Fee: $15 per car beyond 2, show each car separately
+  // Driveway Fee: $15 per car beyond 2
   if (driveway > 2) {
     for (let i = 3; i <= driveway; i++) {
       fees.push({ item: `Driveway Car ${i} Fee`, price: 15 });
@@ -134,7 +139,10 @@ function updatePrice() {
   if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
   total += sidePathFee;
 
-  // Build table HTML
+  // Update hidden totalPrice field for autoresponse
+  totalPriceField.value = total;
+
+  // Build table HTML for your email
   let tableHTML = `<table>
     <tr><th>Item</th><th>Price ($)</th></tr>`;
   fees.forEach(fee => {
