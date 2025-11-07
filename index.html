@@ -97,6 +97,11 @@
     transition: all 0.2s ease;
   }
 
+  select { 
+    max-height: 120px; 
+    overflow-y: auto; 
+  }
+
   input:focus, select:focus, textarea:focus {
     border-color: #2563eb;
     outline: none;
@@ -269,6 +274,15 @@
   <label>Phone Number:</label>
   <input type="tel" name="phone" required>
 
+  <h3>Location</h3>
+  <select name="location" required>
+    <option value="">Select your location</option>
+    <option value="Rosewood">Rosewood</option>
+    <option value="Briarwood">Briarwood</option>
+    <option value="Lakeridge">Lakeridge</option>
+  </select>
+  <input type="hidden" name="locationField" id="locationField">
+
   <h3>House Info</h3>
   <label><input type="radio" name="houseType" value="Lane House / Town House" required> Lane House / Town House</label>
   <label><input type="radio" name="houseType" value="Attached Garage"> Attached Garage</label>
@@ -314,7 +328,7 @@
   <textarea name="notes" rows="4" placeholder="Enter any notes here..."></textarea>
 
   <h3>Price Details</h3>
-  <p id="priceDisplay">Select a House Type and Service Type to see the price.</p>
+  <p id="priceDisplay">Select a House Type, Service Type, and Service Frequency to see the price.</p>
   <p id="serviceDetailsDisplay"></p>
 
   <input type="hidden" name="houseServiceFee" id="houseServiceFee">
@@ -405,6 +419,12 @@ const cornerSidewalkFeeField = document.getElementById('cornerSidewalkFee');
 const sidePathFeeField = document.getElementById('sidePathFee');
 const totalPriceField = document.getElementById('totalPrice');
 const serviceDetailsField = document.getElementById('serviceDetails');
+
+const locationSelect = document.querySelector('select[name="location"]');
+const locationField = document.getElementById('locationField');
+locationSelect.addEventListener('change', () => {
+  locationField.value = locationSelect.value;
+});
 
 function getSelectedValue(radioNodeList) {
   const selected = document.querySelector(`input[name="${radioNodeList[0].name}"]:checked`);
