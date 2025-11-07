@@ -278,6 +278,10 @@
   <label><input type="radio" name="serviceType" value="Premium"> Premium</label>
   <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
 
+  <h3>Service Frequency</h3>
+  <label><input type="radio" name="serviceFrequency" value="Monthly" required> Monthly</label>
+  <label><input type="radio" name="serviceFrequency" value="Single / Day Only"> Single / Day Only</label>
+
   <h3>Driveway Spaces</h3>
   <p>If you have a driveway, how many cars can it fit?</p>
   <select id="driveway" name="driveway" required>
@@ -388,6 +392,7 @@ const serviceDescriptions = {
 
 const houseRadios = document.querySelectorAll('input[name="houseType"]');
 const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
+const frequencyRadios = document.querySelectorAll('input[name="serviceFrequency"]');
 const drivewaySelect = document.getElementById('driveway');
 const cornerSidewalkRadios = document.querySelectorAll('input[name="corner_sidewalk"]');
 const sidePathRadios = document.querySelectorAll('input[name="side_path"]');
@@ -406,15 +411,22 @@ function getSelectedValue(radioNodeList) {
   return selected ? selected.value : null;
 }
 
+[...houseRadios, ...serviceRadios, ...frequencyRadios].forEach(radio => {
+  radio.addEventListener('change', updatePrice);
+});
+drivewaySelect.addEventListener('change', updatePrice);
+[...cornerSidewalkRadios, ...sidePathRadios].forEach(radio => radio.addEventListener('change', updatePrice));
+
 function updatePrice() {
   const house = getSelectedValue(houseRadios);
   const service = getSelectedValue(serviceRadios);
+  const frequency = getSelectedValue(frequencyRadios);
   const driveway = parseInt(drivewaySelect.value) || 0;
   const cornerSidewalk = getSelectedValue(cornerSidewalkRadios);
   const sidePath = getSelectedValue(sidePathRadios);
 
-  if (!house || !service) {
-    priceDisplay.innerHTML = "Select a House Type and Service Type to see the price.";
+  if (!house || !service || !frequency) {
+    priceDisplay.innerHTML = "Select a House Type, Service Type, and Service Frequency to see the price.";
     serviceDetailsDisplay.innerHTML = '';
     totalPriceField.value = '';
     serviceDetailsField.value = '';
@@ -442,21 +454,26 @@ function updatePrice() {
   if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
   total += sidePathFee;
 
-  houseServiceFeeField.value = `${house} - ${service} Service: $${basePrice}`;
+  // Adjust for service frequency
+  let frequencyMultiplier = (frequency === "Single / Day Only") ? 0.25 : 1;
+  total = Math.round(total * frequencyMultiplier);
+
+  fees.push({ item: `Service Frequency: ${frequency}`, price: '' });
+
+  houseServiceFeeField.value = `${house} - ${service} Service: $${Math.round(basePrice * frequencyMultiplier)}`;
   drivewayFeeField.value = drivewayFeeText.trim();
-  cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee}` : '';
-  sidePathFeeField.value = sidePathFee > 0 ? `Side Path: $${sidePathFee}` : '';
+  cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee * frequencyMultiplier}` : '';
+  sidePathFeeField.value = sidePathFee > 0 ? `Side Path: $${sidePathFee * frequencyMultiplier}` : '';
   totalPriceField.value = total;
 
   let tableHTML = `<table>
     <tr><th>Item</th><th>Price ($)</th></tr>`;
   fees.forEach(fee => {
-    tableHTML += `<tr><td>${fee.item}</td><td>${fee.price}</td></tr>`;
+    tableHTML += `<tr><td>${fee.item}</td><td>${fee.price !== '' ? fee.price * frequencyMultiplier : ''}</td></tr>`;
   });
   tableHTML += `<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
   priceDisplay.innerHTML = tableHTML;
 
-  // Display service details
   let detailsHTML = '';
   let detailsText = '';
   serviceDescriptions[service].forEach(item => {
@@ -466,15 +483,7 @@ function updatePrice() {
   serviceDetailsDisplay.innerHTML = detailsHTML;
   serviceDetailsField.value = detailsText;
 }
-
-houseRadios.forEach(radio => radio.addEventListener('change', updatePrice));
-serviceRadios.forEach(radio => radio.addEventListener('change', updatePrice));
-drivewaySelect.addEventListener('change', updatePrice);
-[cornerSidewalkRadios, sidePathRadios].forEach(group => {
-  group.forEach(radio => radio.addEventListener('change', updatePrice));
-});
 </script>
+
 </body>
 </html>
-
-
