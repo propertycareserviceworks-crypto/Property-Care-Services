@@ -265,12 +265,12 @@
 </div>
 
 <div class="container">
-<form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
+<form action="https://submify.vercel.app/propertycareserviceworks@gmail.com" method="POST" enctype="multipart/form-data">
   <label>Full Name:</label>
   <input type="text" name="name" required>
 
   <label>Email:</label>
-  <input type="email" name="email" required>
+  <input type="email" name="_replyto" required>
 
   <label>Address:</label>
   <input type="text" name="address" required>
@@ -297,7 +297,7 @@
   <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
 
   <h3>Service Frequency</h3>
-  <label><input type="radio" name="serviceFrequency" value="Monthly Seasonal Term" required> Monthly Seasonal Term</label>
+  <label><input type="radio" name="serviceFrequency" value="Monthly Plan" required> Seasonal Term - Monthly Payment</label>
   <label><input type="radio" name="serviceFrequency" value="Single / Day Only"> Single / Day Only</label>
 
   <h3>Driveway Spaces</h3>
@@ -342,6 +342,7 @@
   <input type="hidden" name="totalPrice" id="totalPrice">
   <input type="hidden" name="serviceDetails" id="serviceDetails">
 
+  <!-- Submify Hidden Fields -->
   <input type="hidden" name="_subject" value="Service Request Submission">
   <input type="hidden" name="_autoresponse" 
          value="This is an automated response.
@@ -350,9 +351,10 @@ Thank you for choosing our service! We will contact you shortly to confirm your 
 If you have any questions, feel free to call or text us at (639) 916-0667, or simply reply to this email.
 
 Below is the information we received along with the detailed price breakdown.">
-   
   <input type="hidden" name="_template" value="table">
   <input type="hidden" name="_captcha" value="true">
+  <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
+
   <button type="submit">Confirm Request</button>
 </form>
 </div>
@@ -475,9 +477,10 @@ function updatePrice() {
   total += cornerSidewalkFee;
 
   let sidePathFee = (sidePath === "Yes") ? 30 : 0;
-  if (sidePathFee > 0) fees.push({ item: "Side Path / Basement Suite Access", price: sidePathFee });
+  if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
   total += sidePathFee;
 
+  // Adjust for service frequency
   let frequencyMultiplier = (frequency === "Single / Day Only") ? 0.25 : 1;
   total = Math.round(total * frequencyMultiplier);
 
@@ -486,7 +489,7 @@ function updatePrice() {
   houseServiceFeeField.value = `${house} - ${service} Service: $${Math.round(basePrice * frequencyMultiplier)}`;
   drivewayFeeField.value = drivewayFeeText.trim();
   cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee * frequencyMultiplier}` : '';
-  sidePathFeeField.value = sidePathFee > 0 ? `Side Path / Basement Suite Access: $${sidePathFee * frequencyMultiplier}` : '';
+  sidePathFeeField.value = sidePathFee > 0 ? `Side Path: $${sidePathFee * frequencyMultiplier}` : '';
   totalPriceField.value = total;
 
   let tableHTML = `<table>
