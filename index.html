@@ -13,7 +13,6 @@
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    background: #f1f5f9;
   }
 
   .bg-video {
@@ -28,8 +27,8 @@
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
     z-index: -1;
   }
 
@@ -78,8 +77,8 @@
 
   .container {
     max-width: 650px;
-    margin: 120px auto 50px;
-    background: rgba(255, 255, 255, 0.85);
+    margin: 100px auto 50px;
+    background: rgba(255, 255, 255, 0.8);
     border-radius: 20px;
     padding: 30px 40px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.15);
@@ -109,7 +108,7 @@
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
   }
 
-  label { display: block; margin-top: 10px; cursor: pointer; }
+  label { display: block; margin-top: 10px; }
 
   button {
     background: linear-gradient(135deg, #2563eb, #1e40af);
@@ -152,7 +151,6 @@
     margin-top: 15px;
     font-weight: bold;
     color: #1E40AF;
-    overflow-x: auto;
   }
 
   #serviceDetailsDisplay {
@@ -187,7 +185,7 @@
 
   .modal-content {
     background: #fff;
-    margin: 10% auto;
+    margin: 15% auto;
     padding: 20px;
     border-radius: 12px;
     max-width: 500px;
@@ -205,10 +203,6 @@
   @keyframes fadeIn {
     from {opacity: 0; transform: translateY(-20px);}
     to {opacity: 1; transform: translateY(0);}
-  }
-
-  @media (max-width: 700px){
-    .container { margin: 140px 20px 50px; padding: 20px; }
   }
 </style>
 </head>
@@ -228,17 +222,15 @@
   <a onclick="openModal('contactModal')">Contact</a>
 </div>
 
-<!-- About Modal -->
 <div id="aboutModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('aboutModal')">&times;</span>
     <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="About Us" class="modal-image">
     <h2>About Property Care Service Works</h2>
-    <p>We currently specialize in reliable snow removal services. Lawn maintenance and year-round property care services will be available soon as we continue to expand.</p>
+    <p>We currently specialize in reliable snow removal services, ensuring every job is completed professionally and on time. Lawn maintenance and year-round property care services will be available soon as we continue to expand our offerings.</p>
   </div>
 </div>
 
-<!-- Services Modal -->
 <div id="servicesModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('servicesModal')">&times;</span>
@@ -246,13 +238,13 @@
     <p>We offer a variety of packages to meet your needs:</p>
     ❄️ Snow Removal (Basic, Premium, VIP)
     <h3>Service Details</h3>
-    <p><strong>Basic</strong><br>• Snow cleared within 24 hours<br>• Second clearing for snow > 2.5 cm<br>• 1 visit per 24h during heavy snow<br>• Reliable & cost-effective</p>
-    <p><strong>Premium</strong><br>• Snow cleared within 12 hours<br>• First wave clearing during heavy snow<br>• 2 visits per 24h<br>• Faster access & convenience</p>
-    <p><strong>VIP</strong><br>• Snow cleared within 6 hours<br>• Priority first wave clearing<br>• Up to 3 visits per 24h<br>• Fastest response & peace of mind</p>
+    <p>First wave clearing during heavy snowfalls: early morning (before 7 AM) or afternoon, depending on when the snow occurs, to keep walkways accessible during the day.</p>
+    <p><strong>Basic</strong><br>• Snow cleared within 24 hours after snowfall ends<br>• Second clearing for snow > 2.5 cm (1 in)<br>• Up to 1 visit per 24 hours during heavy or ongoing snowfall<br>• Ideal for clients seeking reliable, cost-effective service</p>
+    <p><strong>Premium</strong><br>• Snow cleared within 12 hours after snowfall ends<br>• First wave clearing during heavy snowfalls (before 7 AM or afternoon)<br>• Second clearing same day for snow > 2.5 cm (1 in)<br>• Up to 2 visits per 24 hours during active snowfall<br>• Designed for customers who want faster access and added convenience</p>
+    <p><strong>VIP</strong><br>• Snow cleared within 6 hours after snowfall ends<br>• Priority first wave clearing (early morning or as soon as snow stops)<br>• Second clearing same day for snow > 2.5 cm (1 in), plus an extra visit if snowfall exceeds 5 cm (2 in)<br>• Up to 3 visits per 24 hours during heavy snowfall<br>• Perfect for clients seeking the fastest response and peace of mind</p>
   </div>
 </div>
 
-<!-- Contact Modal -->
 <div id="contactModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('contactModal')">&times;</span>
@@ -263,16 +255,22 @@
 
 <div class="welcome-box">
   <img src="https://i.postimg.cc/WzBpPj8y/wnt-1-Made-with-Poster-My-Wall.jpg" alt="Snow Removal Banner" class="welcome-image">
-  <p style="font-size: 20px; color: #334155; max-width: 700px; margin: 0 auto;">We currently serve Briarwood, Lakeridge, and Rosewood in Saskatoon, Saskatchewan. Fill out our request form below to get started!</p>
+  <p style="font-size: 20px; text-align: center; color: #334155; max-width: 700px; margin: 0 auto;">
+   **At the moment, we’re only serving the Briarwood, Lakeridge, and Rosewood areas in Saskatoon, Saskatchewan, but we plan to expand further in the future.
+  </p>
+ 
+ <p style="font-size: 20px; text-align: center; color: #334155; max-width: 700px; margin: 0 auto;">
+    Fill out our request form below to get started!
+  </p>
 </div>
 
 <div class="container">
-<form action="https://submify.vercel.app/propertycareserviceworks@gmail.com" method="POST">
+<form id="serviceForm" action="https://submify.vercel.app/propertycareserviceworks@gmail.com" method="POST">
   <label>Full Name:</label>
   <input type="text" name="name" required>
 
   <label>Email:</label>
-  <input type="email" name="_replyto" required>
+  <input type="email" name="email" required>
 
   <label>Address:</label>
   <input type="text" name="address" required>
@@ -299,10 +297,11 @@
   <label><input type="radio" name="serviceType" value="V.I.P"> V.I.P</label>
 
   <h3>Service Frequency</h3>
-  <label><input type="radio" name="serviceFrequency" value="Monthly Plan" required> Seasonal Term - Monthly Payment</label>
+  <label><input type="radio" name="serviceFrequency" value="Monthly Plan" required> Monthly Plan</label>
   <label><input type="radio" name="serviceFrequency" value="Single / Day Only"> Single / Day Only</label>
 
   <h3>Driveway Spaces</h3>
+  <p>If you have a driveway, how many cars can it fit?</p>
   <select id="driveway" name="driveway" required>
     <option value="">Select</option>
     <option value="0">0</option>
@@ -312,18 +311,29 @@
     <option value="4">4</option>
   </select>
 
-  <h3>Additional Areas</h3>
-  <label>Front Walks & Steps: <input type="radio" name="front_walks" value="Yes" required> Yes <input type="radio" name="front_walks" value="No"> No</label>
-  <label>Deck / Patio: <input type="radio" name="deck_patio" value="Yes" required> Yes <input type="radio" name="deck_patio" value="No"> No</label>
-  <label>Corner Sidewalk: <input type="radio" name="corner_sidewalk" value="Yes" required> Yes <input type="radio" name="corner_sidewalk" value="No"> No</label>
-  <label>Side Path / Basement Access: <input type="radio" name="side_path" value="Yes" required> Yes <input type="radio" name="side_path" value="No"> No</label>
+  <h3>Clear Snow From These Areas</h3>
+  <p><strong>Front walks and steps:</strong></p>
+  <label><input type="radio" name="front_walks" value="Yes" required> Yes</label>
+  <label><input type="radio" name="front_walks" value="No" required> No</label>
+
+  <p><strong>Deck or patio:</strong></p>
+  <label><input type="radio" name="deck_patio" value="Yes" required> Yes</label>
+  <label><input type="radio" name="deck_patio" value="No" required> No</label>
+
+  <p><strong>Corner city sidewalk:</strong></p>
+  <label><input type="radio" name="corner_sidewalk" value="Yes" required> Yes</label>
+  <label><input type="radio" name="corner_sidewalk" value="No" required> No</label>
+
+  <p><strong>Side path:</strong></p>
+  <label><input type="radio" name="side_path" value="Yes" required> Yes</label>
+  <label><input type="radio" name="side_path" value="No" required> No</label>
 
   <h3>Additional Notes</h3>
   <textarea name="notes" rows="4" placeholder="Enter any notes here..."></textarea>
 
   <h3>Price Details</h3>
-  <div id="priceDisplay">Select House Type, Service Type, and Frequency to see price.</div>
-  <div id="serviceDetailsDisplay"></div>
+  <p id="priceDisplay">Select a House Type, Service Type, and Service Frequency to see the price.</p>
+  <p id="serviceDetailsDisplay"></p>
 
   <input type="hidden" name="houseServiceFee" id="houseServiceFee">
   <input type="hidden" name="drivewayFee" id="drivewayFee">
@@ -332,98 +342,121 @@
   <input type="hidden" name="totalPrice" id="totalPrice">
   <input type="hidden" name="serviceDetails" id="serviceDetails">
 
-  <input type="hidden" name="_subject" value="Service Request Submission">
-  <input type="hidden" name="_autoresponse" value="Thank you for choosing our service! We will contact you shortly.">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_captcha" value="true">
-  <input type="hidden" name="_next" value="https://web3forms.com/success">
+  <input type="hidden" name="_replyto" id="_replyto">
+  <input type="hidden" name="_autoresponse" 
+         value="This is an automated response.
+
+Thank you for choosing our service! We will contact you shortly to confirm your appointment. 
+If you have any questions, feel free to call or text us at (639) 916-0667, or simply reply to this email.
+
+Below is the information we received along with the detailed price breakdown.">
 
   <button type="submit">Confirm Request</button>
 </form>
 </div>
 
 <script>
-function toggleMenu() { document.getElementById('menu').classList.toggle('show'); }
-function openModal(id) { document.getElementById(id).style.display='block'; document.getElementById('menu').classList.remove('show'); }
-function closeModal(id) { document.getElementById(id).style.display='none'; }
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('show');
+}
+
+function openModal(id) {
+  document.getElementById(id).style.display = 'block';
+  document.getElementById('menu').classList.remove('show');
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
 window.onclick = function(event) {
-  ['aboutModal','servicesModal','contactModal'].forEach(id=>{
-    const modal=document.getElementById(id);
-    if(event.target===modal){modal.style.display="none";}
+  ['aboutModal', 'servicesModal', 'contactModal'].forEach(id => {
+    const modal = document.getElementById(id);
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
   });
 }
 
-// Pricing & Service Details
-const prices={ "Lane House / Town House": {"Basic":120,"Premium":150,"V.I.P":180},"Attached Garage":{"Basic":150,"Premium":180,"V.I.P":210}};
-const serviceDescriptions={ "Basic":["Snow cleared within 24h","Second clearing for snow > 2.5 cm","1 visit per 24h during heavy snow","Reliable & cost-effective"], "Premium":["Snow cleared within 12h","First wave clearing during heavy snow","2 visits per 24h","Faster access & convenience"], "V.I.P":["Snow cleared within 6h","Priority first wave clearing","Up to 3 visits per 24h","Fastest response & peace of mind"]};
+const prices = {
+  "Lane House / Town House": { "Basic": 120, "Premium": 150, "V.I.P": 180 },
+  "Attached Garage": { "Basic": 150, "Premium": 180, "V.I.P": 210 }
+};
 
-const houseRadios=document.querySelectorAll('input[name="houseType"]');
-const serviceRadios=document.querySelectorAll('input[name="serviceType"]');
-const frequencyRadios=document.querySelectorAll('input[name="serviceFrequency"]');
-const drivewaySelect=document.getElementById('driveway');
-const cornerSidewalkRadios=document.querySelectorAll('input[name="corner_sidewalk"]');
-const sidePathRadios=document.querySelectorAll('input[name="side_path"]');
-const priceDisplay=document.getElementById('priceDisplay');
-const serviceDetailsDisplay=document.getElementById('serviceDetailsDisplay');
+const serviceDescriptions = {
+  "Basic": [
+    "Snow cleared within 24 hours after snowfall ends",
+    "Second clearing for snow > 2.5 cm (1 in)",
+    "Up to 1 visit per 24 hours during heavy or ongoing snowfall",
+    "Ideal for clients seeking reliable, cost-effective service"
+  ],
+  "Premium": [
+    "Snow cleared within 12 hours after snowfall ends",
+    "First wave clearing during heavy snowfalls (before 7 AM or afternoon)",
+    "Second clearing same day for snow > 2.5 cm (1 in)",
+    "Up to 2 visits per 24 hours during active snowfall",
+    "Designed for customers who want faster access and added convenience"
+  ],
+  "V.I.P": [
+    "Snow cleared within 6 hours after snowfall ends",
+    "Priority first wave clearing (early morning or as soon as snow stops)",
+    "Second clearing same day for snow > 2.5 cm (1 in), plus an extra visit if snowfall exceeds 5 cm (2 in)",
+    "Up to 3 visits per 24 hours during heavy snowfall",
+    "Perfect for clients seeking the fastest response and peace of mind"
+  ]
+};
 
-const houseServiceFeeField=document.getElementById('houseServiceFee');
-const drivewayFeeField=document.getElementById('drivewayFee');
-const cornerSidewalkFeeField=document.getElementById('cornerSidewalkFee');
-const sidePathFeeField=document.getElementById('sidePathFee');
-const totalPriceField=document.getElementById('totalPrice');
-const serviceDetailsField=document.getElementById('serviceDetails');
+const houseRadios = document.querySelectorAll('input[name="houseType"]');
+const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
+const frequencyRadios = document.querySelectorAll('input[name="serviceFrequency"]');
+const driveway = document.getElementById('driveway');
+const cornerSidewalk = document.querySelectorAll('input[name="corner_sidewalk"]');
+const sidePath = document.querySelectorAll('input[name="side_path"]');
+const priceDisplay = document.getElementById('priceDisplay');
+const serviceDetailsDisplay = document.getElementById('serviceDetailsDisplay');
 
-const locationSelect=document.querySelector('select[name="location"]');
-const locationField=document.getElementById('locationField');
-locationSelect.addEventListener('change',()=>{locationField.value=locationSelect.value;});
+function updatePrice() {
+  const houseType = document.querySelector('input[name="houseType"]:checked')?.value;
+  const serviceType = document.querySelector('input[name="serviceType"]:checked')?.value;
+  const frequency = document.querySelector('input[name="serviceFrequency"]:checked')?.value;
+  const drivewayValue = Number(driveway.value) || 0;
+  const cornerSidewalkValue = document.querySelector('input[name="corner_sidewalk"]:checked')?.value === "Yes" ? 20 : 0;
+  const sidePathValue = document.querySelector('input[name="side_path"]:checked')?.value === "Yes" ? 15 : 0;
 
-function getSelectedValue(radioNodeList){const selected=document.querySelector(`input[name="${radioNodeList[0].name}"]:checked`);return selected?selected.value:null;}
-[...houseRadios,...serviceRadios,...frequencyRadios].forEach(radio=>radio.addEventListener('change',updatePrice));
-drivewaySelect.addEventListener('change',updatePrice);
-[...cornerSidewalkRadios,...sidePathRadios].forEach(radio=>radio.addEventListener('change',updatePrice));
+  if (!houseType || !serviceType || !frequency) {
+    priceDisplay.textContent = "Select a House Type, Service Type, and Service Frequency to see the price.";
+    return;
+  }
 
-function updatePrice(){
-  const house=getSelectedValue(houseRadios);
-  const service=getSelectedValue(serviceRadios);
-  const frequency=getSelectedValue(frequencyRadios);
-  const driveway=parseInt(drivewaySelect.value)||0;
-  const cornerSidewalk=getSelectedValue(cornerSidewalkRadios);
-  const sidePath=getSelectedValue(sidePathRadios);
-  if(!house||!service||!frequency){priceDisplay.innerHTML="Select House Type, Service Type, and Frequency to see price."; serviceDetailsDisplay.innerHTML=''; totalPriceField.value=''; serviceDetailsField.value=''; return;}
-  
-  let basePrice=prices[house][service];
-  let total=basePrice;
-  const fees=[{item:`${house} - ${service} Service`,price:basePrice}];
-  
-  let drivewayFeeText='';
-  if(driveway>2){for(let i=3;i<=driveway;i++){fees.push({item:`Driveway Car ${i} Fee`,price:15}); total+=15; drivewayFeeText+=`Driveway Car ${i} Fee: $15\n`;}}
-  
-  let cornerSidewalkFee=(cornerSidewalk==="Yes")?30:0;
-  if(cornerSidewalkFee>0) fees.push({item:"Corner Sidewalk",price:cornerSidewalkFee}); total+=cornerSidewalkFee;
-  
-  let sidePathFee=(sidePath==="Yes")?30:0;
-  if(sidePathFee>0) fees.push({item:"Side Path",price:sidePathFee}); total+=sidePathFee;
-  
-  let frequencyMultiplier=(frequency==="Single / Day Only")?0.25:1;
-  total=Math.round(total*frequencyMultiplier);
-  fees.push({item:`Service Frequency: ${frequency}`,price:''});
-  
-  houseServiceFeeField.value=`${house} - ${service} Service: $${Math.round(basePrice*frequencyMultiplier)}`;
-  drivewayFeeField.value=drivewayFeeText.trim();
-  cornerSidewalkFeeField.value=cornerSidewalkFee>0?`Corner Sidewalk: $${cornerSidewalkFee*frequencyMultiplier}`:'';
-  sidePathFeeField.value=sidePathFee>0?`Side Path: $${sidePathFee*frequencyMultiplier}`:'';
-  totalPriceField.value=total;
-  
-  let tableHTML=`<table><tr><th>Item</th><th>Price ($)</th></tr>`;
-  fees.forEach(fee=>{tableHTML+=`<tr><td>${fee.item}</td><td>${fee.price!==''?fee.price*frequencyMultiplier:''}</td></tr>`;});
-  tableHTML+=`<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
-  priceDisplay.innerHTML=tableHTML;
-  
-  let detailsHTML='', detailsText='';
-  serviceDescriptions[service].forEach(item=>{detailsHTML+=`• ${item}<br>`; detailsText+=`• ${item}\n`;});
-  serviceDetailsDisplay.innerHTML=detailsHTML;
-  serviceDetailsField.value=detailsText;
+  let basePrice = prices[houseType][serviceType];
+  let drivewayFee = drivewayValue * 10;
+  let total = basePrice + drivewayFee + cornerSidewalkValue + sidePathValue;
+
+  if (frequency === "Single / Day Only") total = Math.round(total * 0.35);
+
+  const serviceDetails = serviceDescriptions[serviceType].map(line => `• ${line}`).join('\n');
+
+  priceDisplay.textContent = `Estimated Price: $${total} (${frequency})`;
+  serviceDetailsDisplay.textContent = serviceDetails;
+
+  document.getElementById('houseServiceFee').value = basePrice;
+  document.getElementById('drivewayFee').value = drivewayFee;
+  document.getElementById('cornerSidewalkFee').value = cornerSidewalkValue;
+  document.getElementById('sidePathFee').value = sidePathValue;
+  document.getElementById('totalPrice').value = total;
+  document.getElementById('serviceDetails').value = serviceDetails;
 }
+
+[...houseRadios, ...serviceRadios, ...frequencyRadios, driveway, ...cornerSidewalk, ...sidePath]
+  .forEach(el => el.addEventListener('change', updatePrice));
+
+const form = document.getElementById('serviceForm');
+const emailInput = form.querySelector('input[name="email"]');
+const replyToField = document.getElementById('_replyto');
+
+emailInput.addEventListener('input', () => {
+  replyToField.value = emailInput.value;
+});
 </script>
 
 </body>
