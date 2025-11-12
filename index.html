@@ -265,7 +265,7 @@
 </div>
 
 <div class="container">
-<form id="serviceForm" action="https://submify.vercel.app/propertycareserviceworks@gmail.com" method="POST">
+<form action="https://formsubmit.co/propertycareserviceworks@gmail.com" method="POST">
   <label>Full Name:</label>
   <input type="text" name="name" required>
 
@@ -342,7 +342,7 @@
   <input type="hidden" name="totalPrice" id="totalPrice">
   <input type="hidden" name="serviceDetails" id="serviceDetails">
 
-  <input type="hidden" name="_replyto" id="_replyto">
+  <input type="hidden" name="_subject" value="Service Request Submission">
   <input type="hidden" name="_autoresponse" 
          value="This is an automated response.
 
@@ -350,7 +350,9 @@ Thank you for choosing our service! We will contact you shortly to confirm your 
 If you have any questions, feel free to call or text us at (639) 916-0667, or simply reply to this email.
 
 Below is the information we received along with the detailed price breakdown.">
-
+   
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="true">
   <button type="submit">Confirm Request</button>
 </form>
 </div>
@@ -409,55 +411,105 @@ const serviceDescriptions = {
 const houseRadios = document.querySelectorAll('input[name="houseType"]');
 const serviceRadios = document.querySelectorAll('input[name="serviceType"]');
 const frequencyRadios = document.querySelectorAll('input[name="serviceFrequency"]');
-const driveway = document.getElementById('driveway');
-const cornerSidewalk = document.querySelectorAll('input[name="corner_sidewalk"]');
-const sidePath = document.querySelectorAll('input[name="side_path"]');
+const drivewaySelect = document.getElementById('driveway');
+const cornerSidewalkRadios = document.querySelectorAll('input[name="corner_sidewalk"]');
+const sidePathRadios = document.querySelectorAll('input[name="side_path"]');
 const priceDisplay = document.getElementById('priceDisplay');
 const serviceDetailsDisplay = document.getElementById('serviceDetailsDisplay');
 
-function updatePrice() {
-  const houseType = document.querySelector('input[name="houseType"]:checked')?.value;
-  const serviceType = document.querySelector('input[name="serviceType"]:checked')?.value;
-  const frequency = document.querySelector('input[name="serviceFrequency"]:checked')?.value;
-  const drivewayValue = Number(driveway.value) || 0;
-  const cornerSidewalkValue = document.querySelector('input[name="corner_sidewalk"]:checked')?.value === "Yes" ? 20 : 0;
-  const sidePathValue = document.querySelector('input[name="side_path"]:checked')?.value === "Yes" ? 15 : 0;
+const houseServiceFeeField = document.getElementById('houseServiceFee');
+const drivewayFeeField = document.getElementById('drivewayFee');
+const cornerSidewalkFeeField = document.getElementById('cornerSidewalkFee');
+const sidePathFeeField = document.getElementById('sidePathFee');
+const totalPriceField = document.getElementById('totalPrice');
+const serviceDetailsField = document.getElementById('serviceDetails');
 
-  if (!houseType || !serviceType || !frequency) {
-    priceDisplay.textContent = "Select a House Type, Service Type, and Service Frequency to see the price.";
+const locationSelect = document.querySelector('select[name="location"]');
+const locationField = document.getElementById('locationField');
+locationSelect.addEventListener('change', () => {
+  locationField.value = locationSelect.value;
+});
+
+function getSelectedValue(radioNodeList) {
+  const selected = document.querySelector(`input[name="${radioNodeList[0].name}"]:checked`);
+  return selected ? selected.value : null;
+}
+
+[...houseRadios, ...serviceRadios, ...frequencyRadios].forEach(radio => {
+  radio.addEventListener('change', updatePrice);
+});
+drivewaySelect.addEventListener('change', updatePrice);
+[...cornerSidewalkRadios, ...sidePathRadios].forEach(radio => radio.addEventListener('change', updatePrice));
+
+function updatePrice() {
+  const house = getSelectedValue(houseRadios);
+  const service = getSelectedValue(serviceRadios);
+  const frequency = getSelectedValue(frequencyRadios);
+  const driveway = parseInt(drivewaySelect.value) || 0;
+  const cornerSidewalk = getSelectedValue(cornerSidewalkRadios);
+  const sidePath = getSelectedValue(sidePathRadios);
+
+  if (!house || !service || !frequency) {
+    priceDisplay.innerHTML = "Select a House Type, Service Type, and Service Frequency to see the price.";
+    serviceDetailsDisplay.innerHTML = '';
+    totalPriceField.value = '';
+    serviceDetailsField.value = '';
     return;
   }
 
-  let basePrice = prices[houseType][serviceType];
-  let drivewayFee = drivewayValue * 10;
-  let total = basePrice + drivewayFee + cornerSidewalkValue + sidePathValue;
+  let basePrice = prices[house][service];
+  let total = basePrice;
+  const fees = [{ item: `${house} - ${service} Service`, price: basePrice }];
 
-  if (frequency === "Single / Day Only") total = Math.round(total * 0.35);
+  let drivewayFeeText = '';
+  if (driveway > 2) {
+    for (let i = 3; i <= driveway; i++) {
+      fees.push({ item: `Driveway Car ${i} Fee`, price: 15 });
+      total += 15;
+      drivewayFeeText += `Driveway Car ${i} Fee: $15\n`;
+    }
+  }
 
-  const serviceDetails = serviceDescriptions[serviceType].map(line => `• ${line}`).join('\n');
+  let cornerSidewalkFee = (cornerSidewalk === "Yes") ? 30 : 0;
+  if (cornerSidewalkFee > 0) fees.push({ item: "Corner Sidewalk", price: cornerSidewalkFee });
+  total += cornerSidewalkFee;
 
-  priceDisplay.textContent = `Estimated Price: $${total} (${frequency})`;
-  serviceDetailsDisplay.textContent = serviceDetails;
+  let sidePathFee = (sidePath === "Yes") ? 30 : 0;
+  if (sidePathFee > 0) fees.push({ item: "Side Path", price: sidePathFee });
+  total += sidePathFee;
 
-  document.getElementById('houseServiceFee').value = basePrice;
-  document.getElementById('drivewayFee').value = drivewayFee;
-  document.getElementById('cornerSidewalkFee').value = cornerSidewalkValue;
-  document.getElementById('sidePathFee').value = sidePathValue;
-  document.getElementById('totalPrice').value = total;
-  document.getElementById('serviceDetails').value = serviceDetails;
+  // Adjust for service frequency
+  let frequencyMultiplier = (frequency === "Single / Day Only") ? 0.25 : 1;
+  total = Math.round(total * frequencyMultiplier);
+
+  fees.push({ item: `Service Frequency: ${frequency}`, price: '' });
+
+  houseServiceFeeField.value = `${house} - ${service} Service: $${Math.round(basePrice * frequencyMultiplier)}`;
+  drivewayFeeField.value = drivewayFeeText.trim();
+  cornerSidewalkFeeField.value = cornerSidewalkFee > 0 ? `Corner Sidewalk: $${cornerSidewalkFee * frequencyMultiplier}` : '';
+  sidePathFeeField.value = sidePathFee > 0 ? `Side Path: $${sidePathFee * frequencyMultiplier}` : '';
+  totalPriceField.value = total;
+
+  let tableHTML = `<table>
+    <tr><th>Item</th><th>Price ($)</th></tr>`;
+  fees.forEach(fee => {
+    tableHTML += `<tr><td>${fee.item}</td><td>${fee.price !== '' ? fee.price * frequencyMultiplier : ''}</td></tr>`;
+  });
+  tableHTML += `<tr><td><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
+  priceDisplay.innerHTML = tableHTML;
+
+  let detailsHTML = '';
+  let detailsText = '';
+  serviceDescriptions[service].forEach(item => {
+    detailsHTML += `• ${item}<br>`;
+    detailsText += `• ${item}\n`;
+  });
+  serviceDetailsDisplay.innerHTML = detailsHTML;
+  serviceDetailsField.value = detailsText;
 }
-
-[...houseRadios, ...serviceRadios, ...frequencyRadios, driveway, ...cornerSidewalk, ...sidePath]
-  .forEach(el => el.addEventListener('change', updatePrice));
-
-const form = document.getElementById('serviceForm');
-const emailInput = form.querySelector('input[name="email"]');
-const replyToField = document.getElementById('_replyto');
-
-emailInput.addEventListener('input', () => {
-  replyToField.value = emailInput.value;
-});
 </script>
 
 </body>
 </html>
+
+
